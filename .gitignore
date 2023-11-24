@@ -15,3 +15,6 @@ testMods*/
 *PVs.list
 pv.list
 dbl
+server/out/
+server/build/
+rexroth/O.*

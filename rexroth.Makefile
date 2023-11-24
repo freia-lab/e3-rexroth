@@ -25,7 +25,7 @@ EXCLUDE_ARCHS += linux-corei7-poky
 # Since this file (rexroth.Makefile) is copied into
 # the module directory at build-time, these paths have to be relative
 # to that path
-APP := rexrothApp
+APP := .
 APPDB := $(APP)/Db
 APPSRC := $(APP)/src
 
@@ -38,7 +38,7 @@ APPSRC := $(APP)/src
 
 TEMPLATES += $(wildcard $(APPDB)/*.db)
 TEMPLATES += $(wildcard $(APPDB)/*.proto)
-TEMPLATES += $(wildcard $(APPDB)/*.template)
+#TEMPLATES += $(wildcard $(APPDB)/*.template)
 
 SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 
@@ -55,7 +55,7 @@ SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 # Same as with any source or header files, you can also use $SUBS and $TMPS to define
 # database files to be inflated (using MSI), e.g.
 #
-#     SUBS = $(wildcard $(APPDB)/*.substitutions)
+     SUBS = $(wildcard $(APPDB)/*.substitutions)
 #     TMPS = $(wildcard $(APPDB)/*.template)
 
 USR_DBFLAGS += -I . -I ..

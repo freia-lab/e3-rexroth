@@ -1,0 +1,29 @@
+# This should be the included snippet to configure and run the deployed IOC. 
+# It should be loaded with
+#
+#   iocshLoad("$(rexroth_DIR)rexroth.iocsh", "IP=xxx.yyy.zzz.nnn IP_PORT=iiii")
+
+#- ###                rexroth iocsh                 ###
+#- ####################################################
+#- >> Mandatory
+#- IP         - StreamDevice server's IP address
+#- P	      - PV name prefix, pvname: $(P)$(DEV)...
+#- IOCNAME    - iocname for the asyn record pv prefix
+
+#  >> Optional
+#  IP_PORT    - IP port number (default 9090)
+#  ASYN_PORT  - asyn port name (default PORT1)
+#  DEV        - device name (part of the PV name (default MTR)
+
+addScan(60)
+
+epicsEnvSet("IOCNAME", "$(IOCNAME)")
+
+drvAsynIPPortConfigure("$(ASYN_PORT=PORT1)","$(IP):$(IP_PORT=9090)",0,0,0)
+#Indicate the folder where the protocol file is installed
+epicsEnvSet("STREAM_PROTOCOL_PATH","$(rexroth_DB)")
+
+#Load your database defining the EPICS records
+dbLoadRecords("rexroth.db", "PORT=$(ASYN_PORT=PORT1),P=$(P),DEV=$(DEV=MTR)")
+
+dbLoadRecords("asynRecord.db","P=${IOCNAME},R=:asynRec,PORT=$(ASYN_PORT=PORT1),ADDR='0',IMAX='1024',OMAX='256'")

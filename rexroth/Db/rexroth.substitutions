@@ -1,0 +1,12 @@
+file "rexroth-gen.template" { pattern
+{}
+{}
+}
+
+#file "rexroth-chan.template" { pattern
+#{CHAN}
+#{1}
+#{2}
+#{3}
+#{4}
+#}

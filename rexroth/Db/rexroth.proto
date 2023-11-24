@@ -1,0 +1,28 @@
+# Protocol file for Rexroth HCS01 motor dirver
+
+Terminator = LF;
+ReplyTimeout = 4000;
+
+DELAY = 50;
+
+get_err {
+   out "syst:err?";
+   in "%(\$1:SystErr)#s";
+}
+
+get_id {
+   out "*idn?";
+   in "%#s";
+   @init { out "*idn?";
+   	 in "%#s"; }
+}
+
+get_stat {
+   out "stat?";
+   in "stat: %i";
+}
+
+get_DblVal {
+   out "\$1?";
+   in "\$1: %f";
+}

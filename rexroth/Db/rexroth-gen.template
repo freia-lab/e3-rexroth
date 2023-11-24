@@ -1,0 +1,16 @@
+record(lsi, "$(P)$(DEV):Id") {
+   field (DESC, "HCS01's id")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto get_id $(PORT)")
+   field (SIZV, "100")
+   field (PINI, "YES")
+}
+
+record(ai, "$(P)$(DEV):Pos:sRdV"){   
+   field (DESC, "Motor position")
+   field (PREC, "4")
+   field (EGU, "mm")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto get_DblVal(pos) $(PORT)")
+   field (SCAN, ".5 second")
+}

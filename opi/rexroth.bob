@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-11-24 22:52:15 by konrad-->
+<display version="2.0.0">
+  <name>IndraDrive</name>
+  <macros>
+    <DEV>MTR</DEV>
+    <P>CstatV-AC:</P>
+  </macros>
+  <width>1400</width>
+  <height>800</height>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <class>TITLE</class>
+    <macros>
+      <D>HMP4040</D>
+      <P>CstatV-AC:</P>
+    </macros>
+    <text>Rexroth IndraDrive HCS01 </text>
+    <x use_class="true">20</x>
+    <y use_class="true">0</y>
+    <width>550</width>
+    <height use_class="true">50</height>
+    <font use_class="true">
+      <font name="Header 1" family="Source Sans Pro" style="BOLD_ITALIC" size="36.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="HEADER-TEXT" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+    <horizontal_alignment use_class="true">0</horizontal_alignment>
+    <vertical_alignment use_class="true">1</vertical_alignment>
+    <wrap_words use_class="true">false</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_1</name>
+    <text>Instrument Id:</text>
+    <x>30</x>
+    <y>661</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update</name>
+    <pv_name>$(P)$(DEV):Id.$</pv_name>
+    <x>140</x>
+    <y>661</y>
+    <width>480</width>
+    <format>6</format>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_1</name>
+    <actions execute_as_one="true">
+      <action type="open_display">
+        <file>../freia-symbols/display-builder/asyn/asynRecord.bob</file>
+        <macros>
+          <P>ioc26-rexroth</P>
+          <R>:asynRec</R>
+        </macros>
+        <target>window</target>
+      </action>
+    </actions>
+    <pv_name>ioc26-rexroth:asynRec</pv_name>
+    <text>asynRec</text>
+    <x>1230</x>
+    <y>570</y>
+    <width>97</width>
+    <height>40</height>
+    <foreground_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="240" green="240" blue="240">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_2</name>
+    <text>System error:</text>
+    <x>30</x>
+    <y>641</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_1</name>
+    <pv_name>$(P)$(DEV):SystErr</pv_name>
+    <x>140</x>
+    <y>641</y>
+    <width>480</width>
+    <format>6</format>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Position:</name>
+    <x>100</x>
+    <y>80</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>$(P)$(DEV):Pos:sRdV</pv_name>
+    <x>180</x>
+    <y>80</y>
+  </widget>
+</display>
