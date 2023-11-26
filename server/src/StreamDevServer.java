@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
- 
+import java.text.SimpleDateFormat;
+import java.util.Date; 
 import org.apache.commons.lang3.SystemUtils;
 
 import com.boschrexroth.eal.Connection;
@@ -16,7 +17,7 @@ import com.boschrexroth.eal.Motion;
 import com.boschrexroth.eal.EalAxisUnits;
 
 /**
- * This program implements a simple TCP/IP socketStreamDevice server that replies
+ * This program implements a simple TCP/IP socketStreamDevice serve that replies
  * to the message from the client.
  * This server allows MAX_CONN simultaneous client connections.
  *
@@ -44,21 +45,11 @@ public class StreamDevServer {
 	}
 	
 
-	    java.lang.System.out.println("\n\n\n##############################################################");
-	    java.lang.System.out.println("System Setter's and Getter's API Sample");
-	    java.lang.System.out.println("##############################################################\n\n");
-	    Connection con = new Connection(false);
-	    try {
-		//		Connection con = new Connection(false);
-	    // Connects to the drive
-	    con.connect("192.168.10.46");
-	    Thread.sleep(1000);
+	java.lang.System.out.println("\n\n\n##############################################################");
+	java.lang.System.out.println("                     StreamDevice server");
+	java.lang.System.out.println("##############################################################\n\n");
+	Connection con = new Connection(false);
 
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    System.out.println("Error:" + e.getMessage());
-	}
-	
         int port = Integer.parseInt(args[0]);
 	String ipAddress = "192.168.10.108";
 	
@@ -85,7 +76,10 @@ public class StreamDevServer {
 			serverThread.start();
 		    }
 		} catch (SocketTimeoutException e) {
-		    //		    e.printStackTrace();
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String timestamp = dateFormat.format(new Date());
+		    System.out.println(timestamp + " - Server exception: " + e.getMessage());
+		    // e.printStackTrace();
 		}
             }
  
@@ -106,18 +100,14 @@ class ServerThread extends Thread {
     private Socket socket;
     private Connection con;
     private static Motion motion;
-    private EalAxisUnits units;
+    private static EalAxisUnits units;
+    private static  SimpleDateFormat dateFormat;
     
     public ServerThread(StreamDevServer srv, Socket socket, Connection con) {
         this.socket = socket;
 	this.srv = srv;
 	this.con = con;
-	try {
-	     motion = con.getAxes(0).motion();
-	     units = motion.getAxisUnits();	     
-	} catch (Exception e) {
-	    System.out.println("Error:"+e.getLocalizedMessage());
-	}
+	dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
     
     @Override
@@ -131,13 +121,27 @@ class ServerThread extends Thread {
 
  
             String text;
+	    String reply = "";
  
             do {
                 text = reader.readLine();
 		if (text == null) break;
 		//                String reverseText = new StringBuilder(text).reverse().toString();
 		//                writer.println("Server: " + reverseText);
-		String reply = this.parseString(con, text);
+		try {
+		    reconnect (con);
+		    reply = this.parseString(con, text);
+		} catch (Exception e) {
+		    //		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String timestamp = dateFormat.format(new Date());
+		    System.err.println(timestamp + " - Connection to server failed. Retrying in 3 seconds...");
+
+		    try {
+			Thread.sleep(5000); // Wait for 5 seconds before attempting to reconnect
+		    } catch (InterruptedException ignored) {
+		    }
+		}
+
                 writer.println(reply);
  
             } while (!text.equals("bye"));
@@ -150,6 +154,27 @@ class ServerThread extends Thread {
             ex.printStackTrace();
         }
     }
+
+    private static void reconnect(Connection con) {
+	try {
+	    // Connects to the drive
+	    if (!con.isConnected()) {
+		con.connect("192.168.10.46");
+		Thread.sleep(1000);
+	    }
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+
+	try {
+	    motion = con.getAxes(0).motion();
+	    units = motion.getAxisUnits();
+	} catch (Exception e) {
+	    System.out.println("Error:"+e.getLocalizedMessage());
+	}
+    }
+
     private static String parseString(Connection con, String input) {
         // Split the input string into words
         String[] words = input.split("\\s+");
