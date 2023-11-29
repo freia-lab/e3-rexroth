@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-24 22:52:15 by konrad-->
+<!--Saved on 2023-11-27 17:45:46 by konrad-->
 <display version="2.0.0">
   <name>IndraDrive</name>
   <macros>
@@ -90,13 +90,139 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Position:</name>
-    <x>100</x>
+    <text>Actual position:</text>
+    <x>60</x>
     <y>80</y>
+    <width>140</width>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_2</name>
     <pv_name>$(P)$(DEV):Pos:sRdV</pv_name>
-    <x>180</x>
+    <x>240</x>
     <y>80</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_4</name>
+    <text>State:</text>
+    <x>100</x>
+    <y>190</y>
+    <width>70</width>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_3</name>
+    <pv_name>$(P)$(DEV):sState.VAL</pv_name>
+    <x>180</x>
+    <y>190</y>
+    <width>190</width>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>PM</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdSetPM</pv_name>
+    <x>120</x>
+    <y>230</y>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_2</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name).PROC</pv_name>
+        <value>1</value>
+        <description>OM</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdSetOM</pv_name>
+    <x>230</x>
+    <y>230</y>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_3</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>Drive Enable</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdDrvEnable</pv_name>
+    <x>120</x>
+    <y>270</y>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_4</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>Drive Disable</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdDrvDisable</pv_name>
+    <x>230</x>
+    <y>270</y>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_5</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>Reboot</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdReboot</pv_name>
+    <x>120</x>
+    <y>310</y>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_6</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>Clear Error</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdClrErr</pv_name>
+    <x>360</x>
+    <y>230</y>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_6</name>
+    <text>Diagnostic #</text>
+    <x>400</x>
+    <y>80</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_4</name>
+    <pv_name>$(P)$(DEV):sDiagNo</pv_name>
+    <x>500</x>
+    <y>80</y>
+    <format>4</format>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_7</name>
+    <text>Move to absolute position:</text>
+    <x>60</x>
+    <y>110</y>
+    <width>190</width>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Entry</name>
+    <pv_name>$(P)$(DEV):PosAbs:cSetV</pv_name>
+    <x>240</x>
+    <y>110</y>
   </widget>
 </display>

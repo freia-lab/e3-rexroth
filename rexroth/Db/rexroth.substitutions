@@ -3,10 +3,11 @@ file "rexroth-gen.template" { pattern
 {}
 }
 
-#file "rexroth-chan.template" { pattern
-#{CHAN}
-#{1}
-#{2}
-#{3}
-#{4}
-#}
+file "rexroth-ai.template" { pattern
+{S    FUNC                     EGU      PREC   SCAN    DESC}
+{Pos  "get_DblVal(pos)"        "mm"	 "4"	".5"	"Motor position"}
+{Vel  "get_DblVal(velocity)"   "mm/s"	 "4"	".5"	"Motor position"}
+{Acc  "get_DblVal(accel)"      "mm/s²"	 "4"	".5"	"Motor position"}
+{Decc "get_DblVal(deccel)"     "mm/s²"	 "4"	".5"	"Motor position"}
+{Jerk "get_DblVal(jerk)"       "mm/s³"	 "4"	".5"	"Motor position"}
+}

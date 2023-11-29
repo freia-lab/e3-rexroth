@@ -6,11 +6,79 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
-record(ai, "$(P)$(DEV):Pos:sRdV"){   
-   field (DESC, "Motor position")
-   field (PREC, "4")
-   field (EGU, "mm")
+record(longin, "$(P)$(DEV):sDiagNo") {
+   field (DESC, "HCS01's diagnostic number")
    field (DTYP, "stream")
-   field (INP, "@rexroth.proto get_DblVal(pos) $(PORT)")
+   field (INP, "@rexroth.proto get_DiagNo $(PORT)")
    field (SCAN, ".5 second")
+}
+
+record(lsi, "$(P)$(DEV):sDiagTxt") {
+   field (DESC, "HCS01's diagnostic text")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto get_DiagTxt $(PORT)")
+   field (SIZV, "100")
+   field (PINI, "YES")
+   field (SCAN, ".5 second")
+}
+
+
+record (mbbi, "$(P)$(DEV):sState") {
+   field (DESC, "State machine state")
+   field(ZRVL, "0")
+   field(ZRST, "PM (Parameter mode)")
+   field(ONVL, "1")
+   field(ONST, "bb (Rdy for operation)")
+   field(TWVL, "2")
+   field(TWST, "Ab (Drive ready)")
+   field(THVL, "4")
+   field(THST, "AF (Drive enabled)")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto get_stat $(PORT)")
+   field (SCAN, ".5 second")
+}
+
+record (bo, "$(P)$(DEV):cmdSetPM") {
+   field (DESC, "Set CONDITION_ACTIVE_PARAMETERIZATION")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto setMode(PM) $(PORT)")
+}
+
+record (bo, "$(P)$(DEV):cmdSetOM") {
+   field (DESC, "Set AXIS_CONDITION_ACTIVE")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto setMode(OM) $(PORT)")
+}
+
+record (bo, "$(P)$(DEV):cmdDrvEnable") {
+   field (DESC, "Drive enable")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto setDrive(enable) $(PORT)")
+}
+record (bo, "$(P)$(DEV):cmdDrvDisable") {
+   field (DESC, "Drive disable")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto setDrive(disable) $(PORT)")
+}
+record (bo, "$(P)$(DEV):cmdClrErr") {
+   field (DESC, "Clear error")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto clrErr $(PORT)")
+}
+record (bo, "$(P)$(DEV):cmdReboot") {
+   field (DESC, "Reboot")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto reboot $(PORT)")
+}
+
+record (ao, "$(P)$(DEV):PosAbs:cSetV") {
+   field (DESC, "Move to absolute position")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto moveAbs $(PORT)")
 }

@@ -1,0 +1,8 @@
+record(ai, "$(P)$(DEV):$(S):sRdV") {   
+   field (DESC, "$(DESC)")
+   field (PREC, "$(PREC)")
+   field (EGU, "$(EGU)")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto $(FUNC) $(PORT)")
+   field (SCAN, "$(SCAN) second")
+}

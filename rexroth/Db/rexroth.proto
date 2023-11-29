@@ -18,11 +18,65 @@ get_id {
 }
 
 get_stat {
-   out "stat?";
-   in "stat: %i";
+   out "state?";
+   in "state: %i";
+}
+
+get_DiagNo {
+   out "diagno?";
+   in "diagno: %u";
+}
+
+get_DiagTxt {
+   out "diagtxt?";
+   in "diagtxt: %#s";
 }
 
 get_DblVal {
    out "\$1?";
    in "\$1: %f";
+}
+
+setMode {
+   out "set\$1";
+   in "OK";
+}
+
+setDrive {
+   out "drive\$1";
+   in "OK";
+}
+reboot {
+   out "reboot";
+   in "OK";
+}
+clrErr {
+   out "clrerr";
+   in "OK";
+}
+
+moveAbs {
+   out "pos %f";
+   in "OK";
+@init {   
+   out "pos?";
+   in "pos: %f";
+   }
+}
+moveRel {
+   out "moverel %f";
+   in "OK";
+}
+
+stop {
+   out "stop";
+   in "OK";
+}
+
+set_DblVal {
+   out "\$1 %f";
+   in "OK";
+@init {   
+   get_DblVal($1);
+   }
 }
