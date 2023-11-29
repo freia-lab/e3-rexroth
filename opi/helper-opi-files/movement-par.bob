@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-11-29 12:27:31 by konrad-->
+<display version="2.0.0">
+  <name>movement parameters</name>
+  <width>500</width>
+  <height>500</height>
+  <widget type="embedded" version="2.0.0">
+    <name>Embedded Display</name>
+    <macros>
+      <L>Velocity</L>
+      <S>Vel</S>
+    </macros>
+    <file>dbl-par.bob</file>
+    <x>30</x>
+    <y>20</y>
+    <width>350</width>
+    <height>30</height>
+  </widget>
+  <widget type="embedded" version="2.0.0">
+    <name>Embedded Display_1</name>
+    <macros>
+      <L>Acceleration</L>
+      <S>Acc</S>
+    </macros>
+    <file>dbl-par.bob</file>
+    <x>30</x>
+    <y>50</y>
+    <width>350</width>
+    <height>30</height>
+  </widget>
+  <widget type="embedded" version="2.0.0">
+    <name>Embedded Display_2</name>
+    <macros>
+      <L>Decceleration</L>
+      <S>Decc</S>
+    </macros>
+    <file>dbl-par.bob</file>
+    <x>30</x>
+    <y>80</y>
+    <width>350</width>
+    <height>30</height>
+  </widget>
+  <widget type="embedded" version="2.0.0">
+    <name>Embedded Display_3</name>
+    <macros>
+      <L>Jerk</L>
+      <S>Jerk</S>
+    </macros>
+    <file>dbl-par.bob</file>
+    <x>30</x>
+    <y>110</y>
+    <width>350</width>
+    <height>30</height>
+  </widget>
+</display>

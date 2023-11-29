@@ -1,0 +1,16 @@
+record(ao, "$(P)$(DEV):$(S):cSetV") {   
+   field (DESC, "$(DESC)")
+   field (PREC, "$(PREC)")
+   field (EGU, "$(EGU)")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto set_DblVal($(FUNC)) $(PORT)")
+   field (FLNK, "$(P)$(DEV):$(S):sRdV") 
+}
+record(ai, "$(P)$(DEV):$(S):sRdV") {   
+   field (DESC, "$(DESC)")
+   field (PREC, "$(PREC)")
+   field (EGU, "$(EGU)")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto get_DblVal($(FUNC)) $(PORT)")
+   field (SCAN, "$(SCAN) second")
+}

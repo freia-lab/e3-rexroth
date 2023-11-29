@@ -6,8 +6,18 @@ file "rexroth-gen.template" { pattern
 file "rexroth-ai.template" { pattern
 {S    FUNC                     EGU      PREC   SCAN    DESC}
 {Pos  "get_DblVal(pos)"        "mm"	 "4"	".5"	"Motor position"}
-{Vel  "get_DblVal(velocity)"   "mm/s"	 "4"	".5"	"Motor position"}
-{Acc  "get_DblVal(accel)"      "mm/s²"	 "4"	".5"	"Motor position"}
-{Decc "get_DblVal(deccel)"     "mm/s²"	 "4"	".5"	"Motor position"}
-{Jerk "get_DblVal(jerk)"       "mm/s³"	 "4"	".5"	"Motor position"}
+}
+
+file "rexroth-dblPar.template" { pattern
+{S    FUNC         EGU           PREC   SCAN    DESC}
+{Vel  "velocity"   "mm/s"	 "4"	".5"	"Motor position"}
+{Acc  "accel"      "mm/s²"	 "4"	".5"	"Motor position"}
+{Decc "deccel"     "mm/s²"	 "4"	".5"	"Motor position"}
+{Jerk "jerk"       "mm/s³"	 "4"	".5"	"Motor position"}
+}
+
+file "rexroth-mbbiDirect.template" { pattern
+{S            FUNC         SCAN    DESC}
+{PS  	      "psstatus"   ".5"	   "Power supply status"}
+{Positioning  "posstatus"  ".5"	   "Positioning status"}
 }

@@ -33,11 +33,78 @@ record (mbbi, "$(P)$(DEV):sState") {
    field(TWST, "Ab (Drive ready)")
    field(THVL, "4")
    field(THST, "AF (Drive enabled)")
+   field(FRVL, "3")
+   field(THST, "AH (Drive halt active)")
    field (DTYP, "stream")
    field (INP, "@rexroth.proto get_stat $(PORT)")
    field (SCAN, ".5 second")
 }
 
+# Help records for the Display Builder
+#
+record (calc, "$(P)$(DEV):sPMstate-INT") {
+   field(INPA, "$(P)$(DEV):sState")
+   field(CALC, "(A=0)?1:0")
+   field(FLNK, "$(P)$(DEV):sPMstate")
+   field (SCAN, ".5 second")
+}
+record (bi, "$(P)$(DEV):sPMstate") {
+   field(DESC, "State machine in PM state")
+   field(ZNAM, "PM: Parameter Mode")
+   field(ONAM, "PM: Parameter Mode")
+   field(INP, "$(P)$(DEV):sPMstate-INT")
+}
+record (calc, "$(P)$(DEV):sbbstate-INT") {
+   field(INPA, "$(P)$(DEV):sState")
+   field(CALC, "(A=1)?1:0")
+   field(FLNK, "$(P)$(DEV):sbbstate")
+   field (SCAN, ".5 second")
+}
+record (bi, "$(P)$(DEV):sbbstate") {
+   field(DESC, "State machine in bb state")
+   field(ZNAM, "bb: Rdy for operation")
+   field(ONAM, "bb: Rdy for operation")
+   field(INP, "$(P)$(DEV):sbbstate-INT")
+}
+record (calc, "$(P)$(DEV):sAbstate-INT") {
+   field(INPA, "$(P)$(DEV):sState")
+   field(CALC, "(A=2)?1:0")
+   field(FLNK, "$(P)$(DEV):sAbstate")
+   field (SCAN, ".5 second")
+}
+record (bi, "$(P)$(DEV):sAbstate") {
+   field(DESC, "State machine in Ab state")
+   field(ZNAM, "Ab: Drive ready")
+   field(ONAM, "Ab: Drive ready")
+   field(INP, "$(P)$(DEV):sAbstate-INT")
+}
+record (calc, "$(P)$(DEV):sAFstate-INT") {
+   field(INPA, "$(P)$(DEV):sState")
+   field(CALC, "(A=3)?1:0")
+   field(FLNK, "$(P)$(DEV):sAFstate")
+   field (SCAN, ".5 second")
+}
+record (bi, "$(P)$(DEV):sAFstate") {
+   field(DESC, "State machine in AF state")
+   field(ZNAM, "AF: Drive enabled")
+   field(ONAM, "AF: Drive enabled")
+   field(INP, "$(P)$(DEV):sAFstate-INT")
+}
+record (calc, "$(P)$(DEV):sAHstate-INT") {
+   field(INPA, "$(P)$(DEV):sState")
+   field(CALC, "(A=4)?3:0")
+   field(FLNK, "$(P)$(DEV):sAHstate")
+   field (SCAN, ".5 second")
+}
+record (bi, "$(P)$(DEV):sAHstate") {
+   field(DESC, "State machine in AH state")
+   field(ZNAM, "AF: Drive Halt active")
+   field(ONAM, "AF: Drive Halt active")
+   field(INP, "$(P)$(DEV):sAHstate-INT")
+}
+
+# Commands
+#
 record (bo, "$(P)$(DEV):cmdSetPM") {
    field (DESC, "Set CONDITION_ACTIVE_PARAMETERIZATION")
    field (UDFS, "NO_ALARM")
@@ -77,8 +144,28 @@ record (bo, "$(P)$(DEV):cmdReboot") {
    field (OUT, "@rexroth.proto reboot $(PORT)")
 }
 
-record (ao, "$(P)$(DEV):PosAbs:cSetV") {
+record (ao, "$(P)$(DEV):moveAbs:cSetV") {
    field (DESC, "Move to absolute position")
    field (DTYP, "stream")
    field (OUT, "@rexroth.proto moveAbs $(PORT)")
+   field (PREC, "4")
+   field (EGU, "mm")
+   field (DRVH, "2083.0")
+   field (DRVL, "0.0")
+}
+
+record (ao, "$(P)$(DEV):moveRel:cSetV") {
+   field (DESC, "Move relative currnet position")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto moveRel $(PORT)")
+   field (PREC, "4")
+   field (EGU, "mm")
+   field (UDFS, "NO_ALARM")
+}
+
+record (bo, "$(P)$(DEV):cmdStop") {
+   field (DESC, "Stop motor movement")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto stop $(PORT)")
 }

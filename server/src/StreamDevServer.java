@@ -175,6 +175,23 @@ class ServerThread extends Thread {
 	}
     }
 
+    private static String binaryToDecimal (String binaryString) {
+	if (!binaryString.matches("0b[01]{4}\\.[01]{4}\\.[01]{4}\\.[01]{4}")) {
+            System.out.println("Invalid binary string format");
+            return "";
+        }
+
+	String binString = binaryString.substring(2); // Remove the "0b" prefix
+        String[] binaryParts = binString.split("\\.");
+        StringBuilder binaryValue = new StringBuilder(""); // Add the binary point
+	
+        for (String part : binaryParts) {
+            binaryValue.append(part);
+        }
+       
+        return Long.toString(Long.parseLong(binaryValue.toString(), 2));
+   }
+    
     private static String parseString(Connection con, String input) {
         // Split the input string into words
         String[] words = input.split("\\s+");
@@ -200,6 +217,69 @@ class ServerThread extends Thread {
 	    case "vel?":
 		return getVelocity(words);
 
+	    case "diagno?":
+		return getDiagNo();
+
+	    case "diagtxt?":
+		return getDiagTxt();
+
+	    case "setpm":
+		return setMode (EalAxisCondition.EAL_AXIS_CONDITION_ACTIVE_PARAMETERIZATION);
+
+	    case "setom":
+		return setMode (EalAxisCondition.EAL_AXIS_CONDITION_ACTIVE);
+
+	    case "driveenable":
+		return driveEnable (true);
+		
+	    case "drivedisable":
+		return driveEnable (false);
+
+	    case "clrerr":
+		return clearError (con);
+
+	    case "reboot":
+		return reboot (con);
+
+	    case "moveabs":
+		return move(con, true, words);
+
+	    case "moverel":
+		return move(con, false, words);
+
+	    case "stop":
+		return stop(con);
+
+	    case "velocity":
+		return setPar(con, words, "S-0-0259.0.0");
+	       
+	    case "accel":
+		return setPar(con, words, "S-0-0260.0.0");
+	       
+	    case "deccel":
+		return setPar(con, words, "S-0-0359.0.0");
+	       
+	    case "jerk":
+		return setPar(con, words, "S-0-0193.0.0");
+	       
+	    case "velocity?":
+		return getPar(con, "S-0-0259.0.0", "velocity: ");
+	       
+	    case "accel?":
+		return getPar(con, "S-0-0260.0.0", "accel: ");
+	       
+	    case "deccel?":
+		return getPar(con, "S-0-0359.0.0", "deccel: ");
+	       
+	    case "jerk?":
+		return getPar(con, "S-0-0193.0.0", "jerk: ");
+	       
+	    case "psstatus?":
+		return getPar(con, "P-0-0861.0.0", "psstatus: ");
+	       
+	    case "posstatus?":
+		return getPar(con, "S-0-0437.0.0", "posstatus: ");
+	       
 	    default:
 		return "Unknown action: " + action;
             }
@@ -272,8 +352,179 @@ class ServerThread extends Thread {
 	}
         return result.toString();
     }
+    private static String getDiagNo() {
+        // Implement the logic for getDiagnosisNumber
+        StringBuilder result = new StringBuilder("diagno: ");
+	try {
+	    //	    System.out.println("diagno="+Integer.toUnsignedLong(motion.getDiagnosisNum()));
+	    result.append(Integer.toUnsignedLong(motion.getDiagnosisNum()));	   
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return result.toString();
+    }
+    private static String getDiagTxt() {
+        // Implement the logic for getDiagnosisText
+        StringBuilder result = new StringBuilder("diagtxt: ");
+	try {
+	    result.append(motion.getDiagnosisText());	   
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return result.toString();
+    }
 
+    private static String setMode(EalAxisCondition code) {
+        // Implement the logic for 
+	try {
+	    motion.setCondition(code);
+	    return("OK");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return "";
+    }
+
+    private static String driveEnable(boolean powerOn) {
+        // Implement the logic for 
+	try {
+	    motion.movement().power(powerOn);
+	    return("OK");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return "";
+    }
+    
+    private static String clearError(Connection con) {
+        // Implement the logic for clear error
+	try {
+	    con.getAxes(0).system().clearError();
+	    return("OK");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return "";
+    }
+
+    private static String reboot(Connection con) { //doesn't work from Epics
+        // Implement the logic for reboot
+	try {
+	    con.getAxes(0).system().cleanup();
+	    return("OK");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return "";
+    }
+
+    private static String move(Connection con, boolean absolute, String[] words) {
+        // Implement the logic for move absolute/relative
+	if (words.length > 1) {
+	    System.out.println(Double.parseDouble(words[1]));
+	    System.out.println(words[1]);
+	    try {
+		// Write positioning cmd value
+		con.getAxes(0).parameter().writeDataAsString("S-0-0282", words[1]);
+		// Get the Positioning control word
+		String oldCtrlWord = con.getAxes(0).parameter().readDataAsString("S-0-0346.0.0");
+		StringBuffer newCtrlWord = new StringBuffer(oldCtrlWord);
+		char bit = oldCtrlWord.charAt(20);
+		if  (bit == '0') { bit = '1'; } else { bit = '0'; }
+		newCtrlWord.setCharAt(20,bit);
+		if (absolute) {
+		    // Clear the stop bits, absolute movement
+		    newCtrlWord.replace(17, 20, "000");
+		//		motion.movement().moveAbsolute(Double.parseDouble(words[1]), 2, 1, 1, 0);
+		} else {
+		    // Clear the stop bits, relative movement
+		    newCtrlWord.replace(17, 20, "100");
+		//		motion.movement().moveRelative(Double.parseDouble(words[1]), 2, 1, 1, 0);
+		}
+		System.out.println("Old Positioning control word: " + oldCtrlWord);
+		System.out.println("New Positioning control word: " + newCtrlWord);
+		con.getAxes(0).parameter().writeDataAsString("S-0-0346", newCtrlWord.toString());
+		return("OK");
+	    } catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("Error:" + e.getMessage());
+	    }
+	}
+        return "";
+    }
+    
+    private static String stop(Connection con) {
+        // Implement the logic for stopping the motor movement
+	try {
+	    // Get the Positioning control word
+	    String oldCtrlWord = con.getAxes(0).parameter().readDataAsString("S-0-0346.0.0");
+	    StringBuffer newCtrlWord = new StringBuffer(oldCtrlWord);
+	    // Set the stop bits
+	    newCtrlWord.replace(18, 20, "11");
+	    System.out.println("Old Positioning control word: " + oldCtrlWord);
+	    System.out.println("New Positioning control word: " + newCtrlWord);
+	    con.getAxes(0).parameter().writeDataAsString("S-0-0346", newCtrlWord.toString());
+	    return("OK");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return "";
+    }
+    
+    private static String setPar(Connection con, String[] words, String ParId) {
+        // Implement the logic for setting Double type parameter
+	if (words.length > 1) {
+	    System.out.println(Double.parseDouble(words[1]));
+	    System.out.println(words[1]);
+	    try {
+		// Set the parameter
+		con.getAxes(0).parameter().writeDataAsString(ParId, words[1]);
+		return("OK");
+	    } catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("Error:" + e.getMessage());
+	    }
+	}
+        return "";
+    }
+    private static String getPar(Connection con, String parId, String replyTag) {
+        // Implement the logic for setting Double type parameter
+	//	System.out.println("getPar: parId=" + parId + "   reply tag=" + replyTag);
+	StringBuilder result = new StringBuilder(replyTag);
+	try {
+	    // Get the parameter
+	    String par = con.getAxes(0).parameter().readDataAsString(parId);
+	    // Check if it's a binary parameter
+	    if (par.matches("0b[01]{4}\\.[01]{4}\\.[01]{4}\\.[01]{4}")) {
+		//		System.out.println("Par: " + par + "/" + binaryToDecimal(par));
+		result.append(binaryToDecimal(par));
+	    } else {
+		result.append(par);
+	    }
+	    return result.toString();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return "";
+    }
+    
     // Add more methods for other actions as needed
 
+    private static String performAction1(String[] words) {
+        // Implement the logic for Action1
+        StringBuilder result = new StringBuilder("Performing Action1 with parameters:");
+        for (int i = 1; i < words.length; i++) {
+            result.append("\nParameter ").append(i).append(": ").append(words[i]);
+        }
+        return result.toString();
+    }
 }
 

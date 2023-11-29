@@ -1,0 +1,7 @@
+record(mbbiDirect, "$(P)$(DEV):$(S):Stat") {   
+   field (DESC, "$(DESC)")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto get_DecVal($(FUNC)) $(PORT)")
+   field (SCAN, "$(SCAN) second")
+   field (NOBT, "32")
+}

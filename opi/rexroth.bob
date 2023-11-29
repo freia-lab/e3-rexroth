@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-27 17:45:46 by konrad-->
+<!--Saved on 2023-11-29 16:16:56 by konrad-->
 <display version="2.0.0">
   <name>IndraDrive</name>
   <macros>
@@ -36,14 +36,14 @@
   <widget type="label" version="2.0.0">
     <name>Label_1</name>
     <text>Instrument Id:</text>
-    <x>30</x>
-    <y>661</y>
+    <x>20</x>
+    <y>710</y>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
     <pv_name>$(P)$(DEV):Id.$</pv_name>
-    <x>140</x>
-    <y>661</y>
+    <x>130</x>
+    <y>710</y>
     <width>480</width>
     <format>6</format>
   </widget>
@@ -61,8 +61,8 @@
     </actions>
     <pv_name>ioc26-rexroth:asynRec</pv_name>
     <text>asynRec</text>
-    <x>1230</x>
-    <y>570</y>
+    <x>20</x>
+    <y>630</y>
     <width>97</width>
     <height>40</height>
     <foreground_color>
@@ -74,155 +74,65 @@
       </color>
     </background_color>
   </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_2</name>
-    <text>System error:</text>
+  <widget type="embedded" version="2.0.0">
+    <name>Embedded Display_1</name>
+    <file>helper-opi-files/state-machine.bob</file>
+    <x>480</x>
+    <y>20</y>
+    <height>680</height>
+    <border_width>1</border_width>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group</name>
+    <x>20</x>
+    <y>270</y>
+    <width>392</width>
+    <height>191</height>
+    <style>2</style>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>Label_2</name>
+      <text>Movement parameters</text>
+      <y>-1</y>
+      <width>391</width>
+      <height>30</height>
+      <font>
+        <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_2</name>
+      <file>helper-opi-files/movement-par.bob</file>
+      <y>30</y>
+      <width>390</width>
+      <height>150</height>
+    </widget>
+  </widget>
+  <widget type="embedded" version="2.0.0">
+    <name>Embedded Display</name>
+    <file>helper-opi-files/movement-ctrl.bob</file>
+    <y>60</y>
+    <width>460</width>
+    <height>190</height>
+  </widget>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor</name>
+    <pv_name>$(P)$(DEV):PS:Stat</pv_name>
     <x>30</x>
-    <y>641</y>
+    <y>500</y>
+    <width>270</width>
+    <height>16</height>
+    <numBits>16</numBits>
   </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_1</name>
-    <pv_name>$(P)$(DEV):SystErr</pv_name>
-    <x>140</x>
-    <y>641</y>
-    <width>480</width>
-    <format>6</format>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Position:</name>
-    <text>Actual position:</text>
-    <x>60</x>
-    <y>80</y>
-    <width>140</width>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_2</name>
-    <pv_name>$(P)$(DEV):Pos:sRdV</pv_name>
-    <x>240</x>
-    <y>80</y>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_4</name>
-    <text>State:</text>
-    <x>100</x>
-    <y>190</y>
-    <width>70</width>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_3</name>
-    <pv_name>$(P)$(DEV):sState.VAL</pv_name>
-    <x>180</x>
-    <y>190</y>
-    <width>190</width>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(pv_name)</pv_name>
-        <value>1</value>
-        <description>PM</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(DEV):cmdSetPM</pv_name>
-    <x>120</x>
-    <y>230</y>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_2</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(pv_name).PROC</pv_name>
-        <value>1</value>
-        <description>OM</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(DEV):cmdSetOM</pv_name>
-    <x>230</x>
-    <y>230</y>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_3</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(pv_name)</pv_name>
-        <value>1</value>
-        <description>Drive Enable</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(DEV):cmdDrvEnable</pv_name>
-    <x>120</x>
-    <y>270</y>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_4</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(pv_name)</pv_name>
-        <value>1</value>
-        <description>Drive Disable</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(DEV):cmdDrvDisable</pv_name>
-    <x>230</x>
-    <y>270</y>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_5</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(pv_name)</pv_name>
-        <value>1</value>
-        <description>Reboot</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(DEV):cmdReboot</pv_name>
-    <x>120</x>
-    <y>310</y>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_6</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(pv_name)</pv_name>
-        <value>1</value>
-        <description>Clear Error</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(DEV):cmdClrErr</pv_name>
-    <x>360</x>
-    <y>230</y>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_6</name>
-    <text>Diagnostic #</text>
-    <x>400</x>
-    <y>80</y>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_4</name>
-    <pv_name>$(P)$(DEV):sDiagNo</pv_name>
-    <x>500</x>
-    <y>80</y>
-    <format>4</format>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_7</name>
-    <text>Move to absolute position:</text>
-    <x>60</x>
-    <y>110</y>
-    <width>190</width>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Entry</name>
-    <pv_name>$(P)$(DEV):PosAbs:cSetV</pv_name>
-    <x>240</x>
-    <y>110</y>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor_1</name>
+    <pv_name>$(P)$(DEV):Positioning:Stat</pv_name>
+    <x>30</x>
+    <y>540</y>
+    <width>270</width>
+    <height>16</height>
+    <numBits>16</numBits>
   </widget>
 </display>

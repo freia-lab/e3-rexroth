@@ -37,6 +37,11 @@ get_DblVal {
    in "\$1: %f";
 }
 
+get_DecVal {
+   out "\$1?";
+   in "\$1: %d";
+}
+
 setMode {
    out "set\$1";
    in "OK";
@@ -56,7 +61,7 @@ clrErr {
 }
 
 moveAbs {
-   out "pos %f";
+   out "moveabs %f";
    in "OK";
 @init {   
    out "pos?";
@@ -77,6 +82,7 @@ set_DblVal {
    out "\$1 %f";
    in "OK";
 @init {   
-   get_DblVal($1);
+   out "\$1?";
+   in "\$1: %f";
    }
 }

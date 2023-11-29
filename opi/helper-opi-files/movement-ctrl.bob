@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-11-29 13:49:06 by konrad-->
+<display version="2.0.0">
+  <name>movement control</name>
+  <width>480</width>
+  <height>180</height>
+  <widget type="label" version="2.0.0">
+    <name>Position:</name>
+    <text>Actual position:</text>
+    <x>20</x>
+    <y>55</y>
+    <width>140</width>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>$(P)$(DEV):Pos:sRdV</pv_name>
+    <x>200</x>
+    <y>50</y>
+    <width>140</width>
+    <height>30</height>
+    <font>
+      <font name="LARGE-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="21.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_7</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>STOP</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):cmdStop</pv_name>
+    <x>360</x>
+    <y>89</y>
+    <width>80</width>
+    <height>79</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="WHITE" red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="STOP" red="222" green="33" blue="22">
+      </color>
+    </background_color>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_3</name>
+    <pv_name>$(P)$(DEV):sAFstate</pv_name>
+    <x>140</x>
+    <y>17</y>
+    <width>200</width>
+    <height>25</height>
+    <off_color>
+      <color name="IO POS State" red="160" green="180" blue="137">
+      </color>
+    </off_color>
+    <line_color>
+      <color red="50" green="50" blue="50" alpha="0">
+      </color>
+    </line_color>
+    <square>true</square>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_10</name>
+    <text>State:</text>
+    <x>20</x>
+    <y>20</y>
+    <width>70</width>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_3</name>
+    <pv_name>$(P)$(DEV):sState.VAL</pv_name>
+    <x>140</x>
+    <y>17</y>
+    <width>200</width>
+    <height>25</height>
+    <transparent>true</transparent>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group</name>
+    <x>20</x>
+    <y>89</y>
+    <width>320</width>
+    <height>77</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>Label_7</name>
+      <text>Move to abs. position:</text>
+      <y>5</y>
+      <width>190</width>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="16.0">
+        </font>
+      </font>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Entry</name>
+      <pv_name>$(P)$(DEV):moveAbs:cSetV</pv_name>
+      <x>180</x>
+      <width>140</width>
+      <height>30</height>
+      <font>
+        <font name="LARGE-SANS-PLAIN" family="Source Sans Pro" style="REGULAR" size="21.0">
+        </font>
+      </font>
+      <rules>
+        <rule name="Active" prop_id="enabled" out_exp="false">
+          <exp bool_exp="pvInt0==0">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(DEV):sAFstate</pv_name>
+        </rule>
+      </rules>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_9</name>
+      <text>Move relative to actual position:</text>
+      <y>30</y>
+      <width>160</width>
+      <height>47</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="16.0">
+        </font>
+      </font>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Entry_1</name>
+      <pv_name>$(P)$(DEV):moveRel:cSetV</pv_name>
+      <x>180</x>
+      <y>40</y>
+      <width>140</width>
+      <height>27</height>
+      <font>
+        <font name="LARGE-SANS-PLAIN" family="Source Sans Pro" style="REGULAR" size="21.0">
+        </font>
+      </font>
+      <rules>
+        <rule name="Active" prop_id="enabled" out_exp="false">
+          <exp bool_exp="pvInt0==0">
+            <value>false</value>
+          </exp>
+          <pv_name>$(P)$(DEV):sAFstate</pv_name>
+        </rule>
+      </rules>
+    </widget>
+  </widget>
+</display>
