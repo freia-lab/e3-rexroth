@@ -4,16 +4,19 @@ file "rexroth-gen.template" { pattern
 }
 
 file "rexroth-ai.template" { pattern
-{S    FUNC                     EGU      PREC   SCAN    DESC}
-{Pos  "get_DblVal(pos)"        "mm"	 "4"	".5"	"Motor position"}
+{S          FUNC                     EGU      PREC   SCAN    DESC}
+{Pos        "get_DblVal(pos)"        "mm"     "4"    ".5"    "Motor actual position"}
+{Vel-FB     "get_DblVal(vel)"        "mm/s"   "1"    ".5"    "Table actual velocity"}
+{Acc-FB     "get_DblVal(acc)"        "mm/s²"  "0"    ".5"    "Table actual velocity"}
+{Torque-FB  "get_DblVal(torq)"       "%"      "0"    ".5"    "Table actual velocity"}
 }
 
 file "rexroth-dblPar.template" { pattern
 {S    FUNC         EGU           PREC   SCAN    DESC}
-{Vel  "velocity"   "mm/s"	 "4"	".5"	"Motor position"}
-{Acc  "accel"      "mm/s²"	 "4"	".5"	"Motor position"}
-{Decc "deccel"     "mm/s²"	 "4"	".5"	"Motor position"}
-{Jerk "jerk"       "mm/s³"	 "4"	".5"	"Motor position"}
+{Vel  "velocity"   "mm/s"	 "4"	".5"	"Motor velocity"}
+{Acc  "accel"      "mm/s²"	 "4"	".5"	"Motor acceleration"}
+{Dec  "decel"      "mm/s²"	 "4"	".5"	"Motor deceleration"}
+{Jerk "jerk"       "mm/s³"	 "4"	".5"	"Motor jerk"}
 }
 
 file "rexroth-mbbiDirect.template" { pattern

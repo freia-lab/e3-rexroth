@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-29 16:53:16 by konrad-->
+<!--Saved on 2023-11-30 13:07:08 by konrad-->
 <display version="2.0.0">
   <name>state-machine</name>
   <width>340</width>
@@ -7,7 +7,7 @@
     <name>Polyline_2</name>
     <x>100</x>
     <y>200</y>
-    <width>0</width>
+    <width>1</width>
     <height>340</height>
     <points>
       <point x="0.0" y="340.0">
@@ -117,12 +117,12 @@
       <action type="write_pv">
         <pv_name>$(pv_name)</pv_name>
         <value>1</value>
-        <description>PM</description>
+        <description>Switch to PM</description>
       </action>
     </actions>
     <pv_name>$(P)$(DEV):cmdSetPM</pv_name>
     <x>210</x>
-    <y>480</y>
+    <y>430</y>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="action_button" version="3.0.0">
@@ -131,12 +131,12 @@
       <action type="write_pv">
         <pv_name>$(pv_name).PROC</pv_name>
         <value>1</value>
-        <description>OM</description>
+        <description>Switch to OM</description>
       </action>
     </actions>
     <pv_name>$(P)$(DEV):cmdSetOM</pv_name>
     <x>210</x>
-    <y>430</y>
+    <y>480</y>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="action_button" version="3.0.0">
@@ -150,7 +150,7 @@
     </actions>
     <pv_name>$(P)$(DEV):cmdDrvEnable</pv_name>
     <x>210</x>
-    <y>230</y>
+    <y>225</y>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="action_button" version="3.0.0">
@@ -179,7 +179,17 @@
     <pv_name>$(P)$(DEV):cmdReboot</pv_name>
     <x>210</x>
     <y>550</y>
-    <tooltip>$(actions)</tooltip>
+    <rules>
+      <rule name="Active" prop_id="enabled" out_exp="false">
+        <exp bool_exp="!pvInt0">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):sPMstate</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(actions)
+Active only in PM state</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
     <show_confirm_dialog>true</show_confirm_dialog>
     <confirm_message>Are your sure you want to reboot the controller?</confirm_message>
   </widget>
@@ -212,7 +222,7 @@
       <name>Polyline</name>
       <y>25</y>
       <width>50</width>
-      <height>0</height>
+      <height>1</height>
       <points>
         <point x="50.0" y="0.0">
         </point>
@@ -243,5 +253,85 @@
       <color name="GRAY" red="169" green="169" blue="169">
       </color>
     </line_color>
+  </widget>
+  <widget type="polyline" version="2.0.0">
+    <name>Polyline_1</name>
+    <x>200</x>
+    <y>260</y>
+    <width>1</width>
+    <height>25</height>
+    <points>
+      <point x="0.0" y="25.0">
+      </point>
+      <point x="0.0" y="0.0">
+      </point>
+    </points>
+    <line_width>1</line_width>
+    <line_color>
+      <color name="BLACK" red="0" green="0" blue="0">
+      </color>
+    </line_color>
+    <arrows>1</arrows>
+    <arrow_length>10</arrow_length>
+  </widget>
+  <widget type="polyline" version="2.0.0">
+    <name>Polyline_4</name>
+    <x>200</x>
+    <y>485</y>
+    <width>1</width>
+    <height>25</height>
+    <points>
+      <point x="0.0" y="25.0">
+      </point>
+      <point x="0.0" y="0.0">
+      </point>
+    </points>
+    <line_width>1</line_width>
+    <line_color>
+      <color name="BLACK" red="0" green="0" blue="0">
+      </color>
+    </line_color>
+    <arrows>2</arrows>
+    <arrow_length>10</arrow_length>
+  </widget>
+  <widget type="polyline" version="2.0.0">
+    <name>Polyline_5</name>
+    <x>200</x>
+    <y>230</y>
+    <width>1</width>
+    <height>25</height>
+    <points>
+      <point x="0.0" y="25.0">
+      </point>
+      <point x="0.0" y="0.0">
+      </point>
+    </points>
+    <line_width>1</line_width>
+    <line_color>
+      <color name="BLACK" red="0" green="0" blue="0">
+      </color>
+    </line_color>
+    <arrows>2</arrows>
+    <arrow_length>10</arrow_length>
+  </widget>
+  <widget type="polyline" version="2.0.0">
+    <name>Polyline_6</name>
+    <x>200</x>
+    <y>430</y>
+    <width>1</width>
+    <height>25</height>
+    <points>
+      <point x="0.0" y="25.0">
+      </point>
+      <point x="0.0" y="0.0">
+      </point>
+    </points>
+    <line_width>1</line_width>
+    <line_color>
+      <color name="BLACK" red="0" green="0" blue="0">
+      </color>
+    </line_color>
+    <arrows>1</arrows>
+    <arrow_length>10</arrow_length>
   </widget>
 </display>

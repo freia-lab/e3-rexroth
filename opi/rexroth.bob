@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-29 16:16:56 by konrad-->
+<!--Saved on 2023-11-30 14:42:38 by konrad-->
 <display version="2.0.0">
   <name>IndraDrive</name>
   <macros>
@@ -36,14 +36,14 @@
   <widget type="label" version="2.0.0">
     <name>Label_1</name>
     <text>Instrument Id:</text>
-    <x>20</x>
-    <y>710</y>
+    <x>10</x>
+    <y>670</y>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
     <pv_name>$(P)$(DEV):Id.$</pv_name>
-    <x>130</x>
-    <y>710</y>
+    <x>120</x>
+    <y>670</y>
     <width>480</width>
     <format>6</format>
   </widget>
@@ -61,8 +61,8 @@
     </actions>
     <pv_name>ioc26-rexroth:asynRec</pv_name>
     <text>asynRec</text>
-    <x>20</x>
-    <y>630</y>
+    <x>700</x>
+    <y>650</y>
     <width>97</width>
     <height>40</height>
     <foreground_color>
@@ -78,37 +78,14 @@
     <name>Embedded Display_1</name>
     <file>helper-opi-files/state-machine.bob</file>
     <x>480</x>
-    <y>20</y>
-    <height>680</height>
+    <y>40</y>
+    <width>330</width>
+    <height>600</height>
     <border_width>1</border_width>
-  </widget>
-  <widget type="group" version="2.0.0">
-    <name>Group</name>
-    <x>20</x>
-    <y>270</y>
-    <width>392</width>
-    <height>191</height>
-    <style>2</style>
-    <transparent>true</transparent>
-    <widget type="label" version="2.0.0">
-      <name>Label_2</name>
-      <text>Movement parameters</text>
-      <y>-1</y>
-      <width>391</width>
-      <height>30</height>
-      <font>
-        <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
-        </font>
-      </font>
-      <horizontal_alignment>1</horizontal_alignment>
-    </widget>
-    <widget type="embedded" version="2.0.0">
-      <name>Embedded Display_2</name>
-      <file>helper-opi-files/movement-par.bob</file>
-      <y>30</y>
-      <width>390</width>
-      <height>150</height>
-    </widget>
+    <border_color>
+      <color name="GRAY" red="169" green="169" blue="169">
+      </color>
+    </border_color>
   </widget>
   <widget type="embedded" version="2.0.0">
     <name>Embedded Display</name>
@@ -117,22 +94,36 @@
     <width>460</width>
     <height>190</height>
   </widget>
-  <widget type="byte_monitor" version="2.0.0">
-    <name>Byte Monitor</name>
-    <pv_name>$(P)$(DEV):PS:Stat</pv_name>
-    <x>30</x>
-    <y>500</y>
-    <width>270</width>
-    <height>16</height>
-    <numBits>16</numBits>
-  </widget>
-  <widget type="byte_monitor" version="2.0.0">
-    <name>Byte Monitor_1</name>
-    <pv_name>$(P)$(DEV):Positioning:Stat</pv_name>
-    <x>30</x>
-    <y>540</y>
-    <width>270</width>
-    <height>16</height>
-    <numBits>16</numBits>
+  <widget type="navtabs" version="2.0.0">
+    <name>Navigation Tabs</name>
+    <tabs>
+      <tab>
+        <name>Motion</name>
+        <file>helper-opi-files/movement-par.bob</file>
+        <macros>
+        </macros>
+        <group_name></group_name>
+      </tab>
+      <tab>
+        <name>Positioning status</name>
+        <file>helper-opi-files/positioning-stat.bob</file>
+        <macros>
+        </macros>
+        <group_name></group_name>
+      </tab>
+      <tab>
+        <name>PS status</name>
+        <file>helper-opi-files/ps-stat.bob</file>
+        <macros>
+        </macros>
+        <group_name></group_name>
+      </tab>
+    </tabs>
+    <x>10</x>
+    <y>240</y>
+    <width>440</width>
+    <height>400</height>
+    <direction>0</direction>
+    <tab_width>140</tab_width>
   </widget>
 </display>

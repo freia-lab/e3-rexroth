@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-11-30 11:28:24 by konrad-->
+<display version="2.0.0">
+  <name>Positioning status</name>
+  <width>430</width>
+  <height>350</height>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor_1</name>
+    <pv_name>$(P)$(DEV):PS:Stat</pv_name>
+    <x>10</x>
+    <y>10</y>
+    <width>20</width>
+    <height>335</height>
+    <numBits>16</numBits>
+    <horizontal>false</horizontal>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <text>F2040 or F2022 Device overtemperature
+E2040 Device overtemperature 2 prewarning
+F2018 or F2022 Device overtemperature shutdown
+E2050 Device overtemp. prewarning active
+F2040 or F2022 Device overtemperature 2 shutdown
+E2040 Device overtemperature 2 prewarning
+Supply ready for operation / BB relay status
+3 phases available
+Braking resistor overload warning active
+Converter supply unit error F28xx (converters only)
+Soft start relay supplied with current (converters only)
+Soft start error (converters only)
+Supply ready for power output
+Mains voltage available (converters only)
+Soft start procedure completed (converters only)
+Drive ready for power output</text>
+    <x>40</x>
+    <y>10</y>
+    <width>370</width>
+    <height>340</height>
+    <wrap_words>false</wrap_words>
+    <tooltip>Parameter S-0-0437</tooltip>
+  </widget>
+</display>

@@ -1,0 +1,15 @@
+StreamDevServer uses the EAL library from Bosch Rexroth. It can be found here:
+
+Setup_EAL_SDK-2400.zip - self extracting package for Windows:
+
+https://www.boschrexroth.com/sv/se/media-details/a3df0e6f-2fba-48c2-a83d-6ea2ae0a0328
+
+Linux packages:
+
+ealsdk-2.2.0-0.noarch.rpm.zip:
+https://www.boschrexroth.com/sv/se/media-details/0e437020-893e-4ad8-988b-4c5c4f01c71a
+
+ealsdk-2.2.0-0.deb.zip:
+https://www.boschrexroth.com/sv/se/media-details/b7a0f168-f85d-4890-a9fb-0569a9bd26b7
+
+The Makefile assumes that the packages are installed in /usr/local

@@ -1,55 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-29 12:27:31 by konrad-->
+<!--Saved on 2023-11-30 14:30:58 by konrad-->
 <display version="2.0.0">
   <name>movement parameters</name>
   <width>500</width>
   <height>500</height>
-  <widget type="embedded" version="2.0.0">
-    <name>Embedded Display</name>
-    <macros>
-      <L>Velocity</L>
-      <S>Vel</S>
-    </macros>
-    <file>dbl-par.bob</file>
-    <x>30</x>
-    <y>20</y>
-    <width>350</width>
-    <height>30</height>
-  </widget>
-  <widget type="embedded" version="2.0.0">
-    <name>Embedded Display_1</name>
-    <macros>
-      <L>Acceleration</L>
-      <S>Acc</S>
-    </macros>
-    <file>dbl-par.bob</file>
+  <widget type="group" version="2.0.0">
+    <name>Group</name>
     <x>30</x>
     <y>50</y>
     <width>350</width>
-    <height>30</height>
+    <height>120</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display</name>
+      <macros>
+        <L>Velocity</L>
+        <S>Vel</S>
+      </macros>
+      <file>dbl-par.bob</file>
+      <width>350</width>
+      <height>30</height>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_1</name>
+      <macros>
+        <L>Acceleration</L>
+        <S>Acc</S>
+      </macros>
+      <file>dbl-par.bob</file>
+      <y>30</y>
+      <width>350</width>
+      <height>30</height>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_2</name>
+      <macros>
+        <L>Deceleration</L>
+        <S>Dec</S>
+      </macros>
+      <file>dbl-par.bob</file>
+      <y>60</y>
+      <width>350</width>
+      <height>30</height>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_3</name>
+      <macros>
+        <L>Jerk</L>
+        <S>Jerk</S>
+      </macros>
+      <file>dbl-par.bob</file>
+      <y>90</y>
+      <width>350</width>
+      <height>30</height>
+    </widget>
   </widget>
-  <widget type="embedded" version="2.0.0">
-    <name>Embedded Display_2</name>
-    <macros>
-      <L>Decceleration</L>
-      <S>Decc</S>
-    </macros>
-    <file>dbl-par.bob</file>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <text>Settings</text>
     <x>30</x>
-    <y>80</y>
-    <width>350</width>
+    <y>10</y>
+    <width>200</width>
     <height>30</height>
+    <font>
+      <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+      </font>
+    </font>
   </widget>
-  <widget type="embedded" version="2.0.0">
-    <name>Embedded Display_3</name>
-    <macros>
-      <L>Jerk</L>
-      <S>Jerk</S>
-    </macros>
-    <file>dbl-par.bob</file>
+  <widget type="label" version="2.0.0">
+    <name>Label_1</name>
+    <text>Actual values</text>
     <x>30</x>
-    <y>110</y>
-    <width>350</width>
+    <y>190</y>
+    <width>190</width>
     <height>30</height>
+    <font>
+      <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_2</name>
+    <text>Velocity:</text>
+    <x>30</x>
+    <y>230</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_3</name>
+    <text>Acceleration:</text>
+    <x>30</x>
+    <y>260</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_6</name>
+    <text>Torque:</text>
+    <x>30</x>
+    <y>290</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update</name>
+    <pv_name>$(P)$(DEV):Vel-FB:sRdV</pv_name>
+    <x>150</x>
+    <y>230</y>
+    <width>130</width>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_1</name>
+    <pv_name>$(P)$(DEV):Acc-FB:sRdV</pv_name>
+    <x>150</x>
+    <y>260</y>
+    <width>130</width>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>$(P)$(DEV):Torque-FB:sRdV</pv_name>
+    <x>150</x>
+    <y>290</y>
+    <width>130</width>
   </widget>
 </display>

@@ -217,6 +217,12 @@ class ServerThread extends Thread {
 	    case "vel?":
 		return getVelocity(words);
 
+	    case "acc?":
+		return getActAcceleration(words);
+
+	    case "torq?":
+		return getActTorque(words);
+
 	    case "diagno?":
 		return getDiagNo();
 
@@ -256,7 +262,7 @@ class ServerThread extends Thread {
 	    case "accel":
 		return setPar(con, words, "S-0-0260.0.0");
 	       
-	    case "deccel":
+	    case "decel":
 		return setPar(con, words, "S-0-0359.0.0");
 	       
 	    case "jerk":
@@ -268,8 +274,8 @@ class ServerThread extends Thread {
 	    case "accel?":
 		return getPar(con, "S-0-0260.0.0", "accel: ");
 	       
-	    case "deccel?":
-		return getPar(con, "S-0-0359.0.0", "deccel: ");
+	    case "decel?":
+		return getPar(con, "S-0-0359.0.0", "decel: ");
 	       
 	    case "jerk?":
 		return getPar(con, "S-0-0193.0.0", "jerk: ");
@@ -346,6 +352,28 @@ class ServerThread extends Thread {
         StringBuilder result = new StringBuilder("vel: ");
 	try {
 	    result.append(Double.toString(motion.getActualVelocity()));	   
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return result.toString();
+    }
+    private static String getActAcceleration(String[] words) {
+        // Implement the logic for getActualAcceleration
+        StringBuilder result = new StringBuilder("acc: ");
+	try {
+	    result.append(Double.toString(motion.getActualAcceleration()));	   
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	}
+        return result.toString();
+    }
+    private static String getActTorque(String[] words) {
+        // Implement the logic for getActualTorque
+        StringBuilder result = new StringBuilder("torq: ");
+	try {
+	    result.append(Double.toString(motion.getActualTorque()));	   
 	} catch (Exception e) {
 	    e.printStackTrace();
 	    System.out.println("Error:" + e.getMessage());

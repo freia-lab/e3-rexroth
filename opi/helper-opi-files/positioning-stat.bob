@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-11-30 11:13:16 by konrad-->
+<display version="2.0.0">
+  <name>Positioning status</name>
+  <width>430</width>
+  <height>230</height>
+  <widget type="group" version="2.0.0">
+    <name>Group</name>
+    <x>10</x>
+    <y>10</y>
+    <width>400</width>
+    <height>210</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="byte_monitor" version="2.0.0">
+      <name>Byte Monitor_1</name>
+      <pv_name>$(P)$(DEV):Positioning:Stat</pv_name>
+      <y>65</y>
+      <width>20</width>
+      <height>145</height>
+      <numBits>7</numBits>
+      <horizontal>false</horizontal>
+    </widget>
+    <widget type="byte_monitor" version="2.0.0">
+      <name>Byte Monitor_2</name>
+      <pv_name>$(P)$(DEV):Positioning:Stat</pv_name>
+      <y>3</y>
+      <width>20</width>
+      <height>60</height>
+      <startBit>12</startBit>
+      <numBits>3</numBits>
+      <horizontal>false</horizontal>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label</name>
+      <text>Target position outside position limit values
+Positioning velocity &gt; nLimit
+Jog mode active
+Drive decelerating
+Drive accelerating
+Constant command velocity
+Interpolator stopped
+In target position (ITP)
+ITP (valid only for OM with drive-internal interpolation)
+Target position attained (generated only with OM)</text>
+      <x>30</x>
+      <width>370</width>
+      <height>210</height>
+      <wrap_words>false</wrap_words>
+      <tooltip>Parameter S-0-0437</tooltip>
+    </widget>
+  </widget>
+</display>
