@@ -24,7 +24,7 @@ import com.boschrexroth.eal.EalAxisUnits;
  * @author K. Gajewski
  */
 public class StreamDevServer { 
-    static final int MAX_CONN = 1;           // Max number of connected clients
+    static final int MAX_CONN = 2;           // Max number of connected clients
     private int clients = 0;
     
    public synchronized void changeVariable(int newValue) {
@@ -292,6 +292,12 @@ class ServerThread extends Thread {
 	    case "posstatus?":
 		return getPar(con, "S-0-0437.0.0", "posstatus: ");
 	       
+	    case "par?":
+		return getParAsString(con, words);
+
+	    case "par":
+		return setParAsString(con, words);
+
 	    default:
 		return "Unknown action: " + action;
             }
@@ -529,7 +535,7 @@ class ServerThread extends Thread {
         return "";
     }
     private static String getPar(Connection con, String parId, String replyTag) {
-        // Implement the logic for setting Double type parameter
+        // Implement the logic for getting  parameter
 	//	System.out.println("getPar: parId=" + parId + "   reply tag=" + replyTag);
 	StringBuilder result = new StringBuilder(replyTag);
 	try {
@@ -549,6 +555,44 @@ class ServerThread extends Thread {
 	}
         return "";
     }
+    private static String getParAsString(Connection con, String[] words) {
+        // Implement the logic for getting the parameter
+	StringBuilder result = new StringBuilder("par: ");
+	if (words.length < 2) return "par: No_parId"; 
+	try {
+	    // Get the parameter
+	    String par = con.getAxes(0).parameter().readDataAsString(words[1]);
+	    result.append(words[1]).append(" ");
+	    result.append(par);
+	    return result.toString();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	    return "Error: " + e.getMessage();
+	}
+    }
+
+     private static String setParAsString(Connection con, String[] words) {
+	 // Implement the logic for setting  parameter
+	 if (words.length < 3) return "par: Wrong_fmt"; 
+	 StringBuilder result = new StringBuilder("");
+	 for (int i = 2; i < words.length; i++) {
+	     result.append(words[i]);
+	     if (i !=  (words.length - 1))
+		 result.append(" ");
+	 }
+	 System.out.println(words[1] + " " + "\"" + result.toString() + "\"");
+
+	 try {
+	     // Set the parameter
+	     con.getAxes(0).parameter().writeDataAsString(words[1], result.toString());
+	 } catch (Exception e) {
+	     e.printStackTrace();
+	     System.out.println("Error:" + e.getMessage());
+	     return "Error: " + e.getMessage();
+	 }
+	 return "OK";
+     }
     
     // Add more methods for other actions as needed
 

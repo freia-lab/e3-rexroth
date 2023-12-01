@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-12-01 19:33:37 by konrad-->
+<display version="2.0.0">
+  <name>param-r/w</name>
+  <width>480</width>
+  <height>200</height>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <text>Parameter ID</text>
+    <x>30</x>
+    <y>10</y>
+    <width>130</width>
+    <height>30</height>
+    <font>
+      <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_2</name>
+    <text>Name:</text>
+    <x>30</x>
+    <y>50</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_3</name>
+    <text>Status:</text>
+    <x>30</x>
+    <y>70</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_6</name>
+    <text>Min:</text>
+    <x>30</x>
+    <y>90</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update</name>
+    <pv_name>$(P)$(DEV):par:sRdV</pv_name>
+    <x>90</x>
+    <y>130</y>
+    <width>250</width>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Entry</name>
+    <pv_name>$(P)$(DEV):parId</pv_name>
+    <x>170</x>
+    <y>10</y>
+    <width>170</width>
+    <height>30</height>
+    <font>
+      <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_7</name>
+    <text>Max:</text>
+    <x>30</x>
+    <y>110</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_8</name>
+    <text>Scan:</text>
+    <x>350</x>
+    <y>110</y>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_9</name>
+    <text>Value:</text>
+    <x>30</x>
+    <y>140</y>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Entry_1</name>
+    <pv_name>$(P)$(DEV):par:cSetV</pv_name>
+    <x>90</x>
+    <y>150</y>
+    <width>250</width>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>SCAN</name>
+    <pv_name>$(P)$(DEV):par:sRdV.SCAN</pv_name>
+    <x>350</x>
+    <y>130</y>
+    <width>110</width>
+  </widget>
+</display>

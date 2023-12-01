@@ -86,3 +86,13 @@ set_DblVal {
    in "\$1: %f";
    }
 }
+
+getPar {
+   out "par? %(\$1)s";
+   in "par: %(\$1)s %#s";
+}
+
+setPar {
+   out "par %(\$1)s %#s";
+   in "OK";
+}

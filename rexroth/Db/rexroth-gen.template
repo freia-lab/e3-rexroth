@@ -6,6 +6,28 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
+record(stringout, "$(P)$(DEV):parId") {
+   field (DESC, "HCS01's parameter id")
+   field (FLNK, "$(P)$(DEV):par:sRdV")
+   field (UDFS, "NO_ALARM")
+}
+
+record(stringout, "$(P)$(DEV):par:cSetV") {
+   field (DESC, "Parameter value out")
+   field (DTYP, "stream")
+   field (OUT, "@rexroth.proto setPar($(P)$(DEV):parId) $(PORT)")
+   field (FLNK, "$(P)$(DEV):par:sRdV")
+   field (UDFS, "NO_ALARM")
+}
+
+record(stringin, "$(P)$(DEV):par:sRdV") {
+   field (DESC, "Parameter value in")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId) $(PORT)")
+   field (UDFS, "NO_ALARM")
+}
+
+
 record(longin, "$(P)$(DEV):sDiagNo") {
    field (DESC, "HCS01's diagnostic number")
    field (DTYP, "stream")
