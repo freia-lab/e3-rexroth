@@ -49,9 +49,15 @@ public class StreamDevServer {
 	java.lang.System.out.println("                     StreamDevice server");
 	java.lang.System.out.println("##############################################################\n\n");
 	Connection con = new Connection(false);
+	String ipAddress = "";
 
         int port = Integer.parseInt(args[0]);
-	String ipAddress = "192.168.10.108";
+	if (args.length > 1)  {
+	    ipAddress = args[1];
+	}
+	else {
+	    ipAddress = "localhost";
+	}
 	
         try {
 	    InetSocketAddress address = new InetSocketAddress(ipAddress, port);
