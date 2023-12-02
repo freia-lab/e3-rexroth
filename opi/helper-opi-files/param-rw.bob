@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-12-02 21:31:58 by konrad-->
+<!--Saved on 2023-12-02 21:50:33 by konrad-->
 <display version="2.0.0">
   <name>param-r/w</name>
   <width>480</width>
@@ -40,6 +40,9 @@
     <x>90</x>
     <y>130</y>
     <width>310</width>
+    <height>40</height>
+    <wrap_words>false</wrap_words>
+    <interactive>true</interactive>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Entry</name>
@@ -74,7 +77,7 @@
     <name>Text Entry_1</name>
     <pv_name>$(P)$(DEV):par:cSetV</pv_name>
     <x>90</x>
-    <y>150</y>
+    <y>170</y>
     <width>380</width>
   </widget>
   <widget type="combo" version="2.0.0">

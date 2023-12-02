@@ -89,7 +89,7 @@ set_DblVal {
 
 getPar {
    out "par? %(\$1)s";
-   in "par: %(\$1)s %#s\x00%(\$2)d";
+   in "par: %(\$1)s %#s\x00%(\$2)d %(\$3)s %(\$4)s %(\$5)s";
 }
 
 getParName {

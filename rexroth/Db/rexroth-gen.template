@@ -16,10 +16,10 @@ record(seq, "$(P)$(DEV):RdPpar-seq") {
    field(SELM, "All")
    field(LNK0, "$(P)$(DEV):parName.PROC")
    field(DOL0, "1")
-   field(DLY0, "1.0")
+   field(DLY0, "0.5")
    field(LNK1, "$(P)$(DEV):par:sRdV.PROC")
    field(DOL1, "1")
-   field(DLY1, "3.0")
+   field(DLY1, "1.0")
 }
 
 record(lsi, "$(P)$(DEV):parName") {
@@ -42,7 +42,7 @@ record(stringout, "$(P)$(DEV):par:cSetV") {
 record(stringin, "$(P)$(DEV):par:sRdV") {
    field (DESC, "Parameter value in")
    field (DTYP, "stream")
-   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId,$(P)$(DEV):parStatus) $(PORT)")
+   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId,$(P)$(DEV):parStatus,$(P)$(DEV):parMin,$(P)$(DEV):parMax,$(P)$(DEV):parEGU) $(PORT)")
    field (UDFS, "NO_ALARM")
    field (FLNK, "$(P)$(DEV):parName")
 }

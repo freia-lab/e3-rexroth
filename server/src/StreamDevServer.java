@@ -571,13 +571,16 @@ class ServerThread extends Thread {
 	    result.append(par);
 	    result.append("\0");
 	    boolean status = p.readDataStatus(words[1]);
-	    if (status) result.append("1");
-	    else result.append("0");
+	    if (status) result.append("1 ");
+	    else result.append("0 ");
 	    System.out.println(
 			       "Min:" + p.readMinimumAsString(words[1]) + 
-			       " Max:" + p.readMinimumAsString(words[1]) + 
+			       " Max:" + p.readMaximumAsString(words[1]) + 
 			       " Unit:" + p.readUnit(words[1]));
 	    System.out.println("Reply: " + result.toString());
+	    result.append(p.readMinimumAsString(words[1])).append(" ");
+	    result.append(p.readMaximumAsString(words[1])).append(" ");
+	    result.append(p.readUnit(words[1]));
 	    return result.toString();
 	} catch (Exception e) {
 	    e.printStackTrace();
