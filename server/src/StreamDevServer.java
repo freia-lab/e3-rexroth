@@ -15,6 +15,7 @@ import com.boschrexroth.eal.utils.DiagnosisTableHelper;
 import com.boschrexroth.eal.EalAxisCondition;
 import com.boschrexroth.eal.Motion;
 import com.boschrexroth.eal.EalAxisUnits;
+import com.boschrexroth.eal.Parameter;
 
 /**
  * This program implements a simple TCP/IP socketStreamDevice serve that replies
@@ -564,13 +565,18 @@ class ServerThread extends Thread {
 	if (words.length < 2) return "par: No_parId"; 
 	try {
 	    // Get the parameter
-	    String par = con.getAxes(0).parameter().readDataAsString(words[1]);
+	    Parameter p = con.getAxes(0).parameter();
+	    String par = p.readDataAsString(words[1]);
 	    result.append(words[1]).append(" ");
 	    result.append(par);
 	    result.append("\0");
-	    boolean status = con.getAxes(0).parameter().readDataStatus(words[1]);
+	    boolean status = p.readDataStatus(words[1]);
 	    if (status) result.append("1");
 	    else result.append("0");
+	    System.out.println(
+			       "Min:" + p.readMinimumAsString(words[1]) + 
+			       " Max:" + p.readMinimumAsString(words[1]) + 
+			       " Unit:" + p.readUnit(words[1]));
 	    System.out.println("Reply: " + result.toString());
 	    return result.toString();
 	} catch (Exception e) {

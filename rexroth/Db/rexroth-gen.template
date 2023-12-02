@@ -8,8 +8,18 @@ record(lsi, "$(P)$(DEV):Id") {
 
 record(stringout, "$(P)$(DEV):parId") {
    field (DESC, "HCS01's parameter id")
-   field (FLNK, "$(P)$(DEV):parName")
+   field (FLNK, "$(P)$(DEV):RdPpar-seq")
    field (UDFS, "NO_ALARM")
+}
+
+record(seq, "$(P)$(DEV):RdPpar-seq") {
+   field(SELM, "All")
+   field(LNK0, "$(P)$(DEV):parName.PROC")
+   field(DOL0, "1")
+   field(DLY0, "1.0")
+   field(LNK1, "$(P)$(DEV):par:sRdV.PROC")
+   field(DOL1, "1")
+   field(DLY1, "3.0")
 }
 
 record(lsi, "$(P)$(DEV):parName") {
@@ -18,14 +28,14 @@ record(lsi, "$(P)$(DEV):parName") {
    field (INP, "@rexroth.proto getParName($(P)$(DEV):parId) $(PORT)")
    field (UDFS, "NO_ALARM")
    field (SIZV, "100")
-   field (FLNK, "$(P)$(DEV):par:sRdV")
+#   field (FLNK, "$(P)$(DEV):par:sRdV")
 }
 
 record(stringout, "$(P)$(DEV):par:cSetV") {
    field (DESC, "Parameter value out")
    field (DTYP, "stream")
    field (OUT, "@rexroth.proto setPar($(P)$(DEV):parId) $(PORT)")
-   field (FLNK, "$(P)$(DEV):par:sRdV")
+#   field (FLNK, "$(P)$(DEV):par:sRdV")
    field (UDFS, "NO_ALARM")
 }
 
@@ -35,6 +45,19 @@ record(stringin, "$(P)$(DEV):par:sRdV") {
    field (INP, "@rexroth.proto getPar($(P)$(DEV):parId,$(P)$(DEV):parStatus) $(PORT)")
    field (UDFS, "NO_ALARM")
    field (FLNK, "$(P)$(DEV):parName")
+}
+
+record(stringin, "$(P)$(DEV):parEGU") {
+   field (DESC, "Parameter's EGU")
+   field (UDFS, "NO_ALARM")
+}
+record(stringin, "$(P)$(DEV):parMin") {
+   field (DESC, "Parameter's Min value")
+   field (UDFS, "NO_ALARM")
+}
+record(stringin, "$(P)$(DEV):parMax") {
+   field (DESC, "Parameter's Min value")
+   field (UDFS, "NO_ALARM")
 }
 
 record(bi, "$(P)$(DEV):parStatus") {
