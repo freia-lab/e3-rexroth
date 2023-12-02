@@ -89,7 +89,12 @@ set_DblVal {
 
 getPar {
    out "par? %(\$1)s";
-   in "par: %(\$1)s %#s";
+   in "par: %(\$1)s %#s\x00%(\$2)d";
+}
+
+getParName {
+   out "pnam? %(\$1)s";
+   in "pnam: %(\$1)s %#s";
 }
 
 setPar {

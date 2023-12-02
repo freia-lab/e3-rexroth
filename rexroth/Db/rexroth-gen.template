@@ -8,8 +8,17 @@ record(lsi, "$(P)$(DEV):Id") {
 
 record(stringout, "$(P)$(DEV):parId") {
    field (DESC, "HCS01's parameter id")
-   field (FLNK, "$(P)$(DEV):par:sRdV")
+   field (FLNK, "$(P)$(DEV):parName")
    field (UDFS, "NO_ALARM")
+}
+
+record(lsi, "$(P)$(DEV):parName") {
+   field (DESC, "Parameter's name")
+   field (DTYP, "stream")
+   field (INP, "@rexroth.proto getParName($(P)$(DEV):parId) $(PORT)")
+   field (UDFS, "NO_ALARM")
+   field (SIZV, "100")
+   field (FLNK, "$(P)$(DEV):par:sRdV")
 }
 
 record(stringout, "$(P)$(DEV):par:cSetV") {
@@ -23,10 +32,18 @@ record(stringout, "$(P)$(DEV):par:cSetV") {
 record(stringin, "$(P)$(DEV):par:sRdV") {
    field (DESC, "Parameter value in")
    field (DTYP, "stream")
-   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId) $(PORT)")
+   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId,$(P)$(DEV):parStatus) $(PORT)")
    field (UDFS, "NO_ALARM")
+   field (FLNK, "$(P)$(DEV):parName")
 }
 
+record(bi, "$(P)$(DEV):parStatus") {
+   field (DESC, "Parameter status")
+   field (ZNAM, "OK")
+   field (ONAM, "ERR")
+   field (OSV, "MAJOR")
+   field (UDFS, "NO_ALARM")
+}
 
 record(longin, "$(P)$(DEV):sDiagNo") {
    field (DESC, "HCS01's diagnostic number")

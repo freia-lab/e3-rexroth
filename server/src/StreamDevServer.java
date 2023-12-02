@@ -295,6 +295,9 @@ class ServerThread extends Thread {
 	    case "par?":
 		return getParAsString(con, words);
 
+	    case "pnam?":
+		return getParName(con, words);
+
 	    case "par":
 		return setParAsString(con, words);
 
@@ -562,6 +565,28 @@ class ServerThread extends Thread {
 	try {
 	    // Get the parameter
 	    String par = con.getAxes(0).parameter().readDataAsString(words[1]);
+	    result.append(words[1]).append(" ");
+	    result.append(par);
+	    result.append("\0");
+	    boolean status = con.getAxes(0).parameter().readDataStatus(words[1]);
+	    if (status) result.append("1");
+	    else result.append("0");
+	    System.out.println("Reply: " + result.toString());
+	    return result.toString();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    System.out.println("Error:" + e.getMessage());
+	    return "Error: " + e.getMessage();
+	}
+    }
+
+    private static String getParName(Connection con, String[] words) {
+        // Implement the logic for getting the parameter's name
+	StringBuilder result = new StringBuilder("pnam: ");
+	if (words.length < 2) return "par: No_parId"; 
+	try {
+	    // Get the parameter
+	    String par = con.getAxes(0).parameter().readName(words[1]);
 	    result.append(words[1]).append(" ");
 	    result.append(par);
 	    return result.toString();
