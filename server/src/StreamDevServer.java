@@ -3,6 +3,7 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.Date; 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.cli.*;
 
 import com.boschrexroth.eal.Connection;
 import com.boschrexroth.eal.EalDateAndTime;
@@ -20,7 +21,8 @@ import com.boschrexroth.eal.Parameter;
 /**
  * This program implements a simple TCP/IP socketStreamDevice serve that replies
  * to the message from the client.
- * This server allows MAX_CONN simultaneous client connections.
+ * This server allows max_conn simultaneous client connections (default 1, can be change with
+ * -max_conn command line option
  *
  * @author K. Gajewski
  */
@@ -39,27 +41,59 @@ public class StreamDevServer {
 
     public static void main(String[] args) throws Exception {
 	StreamDevServer server = new StreamDevServer();
-	
-        if (args.length < 1) {
-            System.out.println("Specify the port number" );
-	    return;
-	}
-	
+	// Default values
+	String ipAddress = "localhost";
+	int port = 2195;
+	int max_conn = 1;
+        // Define options
+        Options options = new Options();
+        options.addOption("drive_ip", true, "Option drive_ip with a required argument");
+        options.addOption("port", true, "Option server's port number with a required argument");
+        options.addOption("bind_addr", true, "Bind address (default 'localhost')");
+        options.addOption("max_conn", true, "Maximum number of simultaneus connections (default 1)");
+
+        // Parse command line arguments
+        CommandLineParser parser = new BasicParser();
+        try {
+            CommandLine cmd = parser.parse(options, args);
+
+            // Check for options
+            if (cmd.hasOption("drive_ip")) {
+                String drive = cmd.getOptionValue("drive_ip");
+                System.out.println("Option drive_ip with argument: " + drive);
+            } else {
+                System.err.println("Option drive_ip is required. Please provide the IP address of the motor drive controller.");
+                System.err.println("Other options:\n\t-port (default 2195)\n\t-bind_addr (default localhost)\n\t-max_conn (default 1).");
+                return;
+            }
+
+            if (cmd.hasOption("port")) {
+                System.out.println("port specified");
+		port = Integer.parseInt(cmd.getOptionValue("port"));
+                System.out.println("Option port with argument: " + port);
+            }
+
+            if (cmd.hasOption("bind_addr")) {
+                System.out.println("Option bind_addr enabled");
+		ipAddress = cmd.getOptionValue("bind_addr");
+                System.out.println("Option bind_addr with argument: " + ipAddress);
+            }
+            if (cmd.hasOption("max_conn")) {
+                System.out.println("Option max_conn enabled");
+		max_conn = Integer.parseInt(cmd.getOptionValue("max_conn"));
+		System.out.println("Option max_conn with argument: " + max_conn);
+           }
+
+        } catch (ParseException e) {
+            System.err.println("Error parsing command line arguments: " + e.getMessage());
+	return;
+        }
 
 	java.lang.System.out.println("\n\n\n##############################################################");
 	java.lang.System.out.println("                     StreamDevice server");
 	java.lang.System.out.println("##############################################################\n\n");
 	Connection con = new Connection(false);
-	String ipAddress = "";
 
-        int port = Integer.parseInt(args[0]);
-	if (args.length > 1)  {
-	    ipAddress = args[1];
-	}
-	else {
-	    ipAddress = "localhost";
-	}
-	
         try {
 	    InetSocketAddress address = new InetSocketAddress(ipAddress, port);
 	    ServerSocket serverSocket = new ServerSocket();
@@ -73,10 +107,10 @@ public class StreamDevServer {
 		    Socket socket = serverSocket.accept();
 		    System.out.println("Created a new socket" + server.clients);
 		    server.clients++;
-		    if (server.clients > MAX_CONN) {
+		    if (server.clients > max_conn) {
 			socket.close();
 			server.clients--;
-			System.out.println("Connection rejected. Max number of connctions (" + MAX_CONN + ") exceeded");
+			System.out.println("Connection rejected. Max number of connctions (" + max_conn + ") exceeded");
 		    } else {
 			System.out.println("New client connected. Number of clients: " + server.clients);
 			ServerThread serverThread =  new ServerThread(server, socket, con);

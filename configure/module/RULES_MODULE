@@ -36,3 +36,5 @@ server:
 
 server-clean:
 	cd server; make clean
+run-server:
+	cd server; MY_ARGS="$(ARGS)" make run

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-12-02 21:50:33 by konrad-->
+<!--Saved on 2023-12-04 12:34:44 by konrad-->
 <display version="2.0.0">
   <name>param-r/w</name>
-  <width>480</width>
-  <height>200</height>
+  <macros>
+    <W>freia.physics.uu.se</W>
+  </macros>
+  <width>600</width>
+  <height>250</height>
   <widget type="label" version="2.0.0">
     <name>Label</name>
     <text>Parameter ID</text>
@@ -40,7 +43,7 @@
     <x>90</x>
     <y>130</y>
     <width>310</width>
-    <height>40</height>
+    <height>60</height>
     <wrap_words>false</wrap_words>
     <interactive>true</interactive>
   </widget>
@@ -65,26 +68,28 @@
   <widget type="label" version="2.0.0">
     <name>Label_8</name>
     <text>Scan:</text>
-    <x>360</x>
+    <x>420</x>
+    <y>160</y>
+    <width>70</width>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_9</name>
     <text>Value:</text>
     <x>30</x>
-    <y>140</y>
+    <y>130</y>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Entry_1</name>
     <pv_name>$(P)$(DEV):par:cSetV</pv_name>
     <x>90</x>
-    <y>170</y>
-    <width>380</width>
+    <y>190</y>
+    <width>500</width>
   </widget>
   <widget type="combo" version="2.0.0">
     <name>SCAN</name>
     <pv_name>$(P)$(DEV):par:sRdV.SCAN</pv_name>
-    <x>360</x>
-    <y>20</y>
+    <x>480</x>
+    <y>160</y>
     <width>110</width>
   </widget>
   <widget type="textupdate" version="2.0.0">
@@ -92,7 +97,7 @@
     <pv_name>$(P)$(DEV):parName.$</pv_name>
     <x>90</x>
     <y>50</y>
-    <width>380</width>
+    <width>500</width>
     <format>6</format>
   </widget>
   <widget type="textupdate" version="2.0.0">
@@ -136,5 +141,24 @@
     <x>410</x>
     <y>110</y>
     <width>60</width>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button Template_3</name>
+    <actions>
+      <action type="open_webpage">
+        <url>https://$(W)/CSS/pdf/Gersemi/Parameters_R911328651_15.pdf</url>
+        <description>Show manual</description>
+      </action>
+    </actions>
+    <text>Help</text>
+    <x>510</x>
+    <y>10</y>
+    <width>80</width>
+    <foreground_color>
+      <color name="BLACK" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <tooltip>Opens Grafcet diagram
+in the web browser</tooltip>
   </widget>
 </display>

@@ -6,26 +6,37 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
+
 record(stringout, "$(P)$(DEV):parId") {
    field (DESC, "HCS01's parameter id")
-   field (FLNK, "$(P)$(DEV):RdPpar-seq")
+   field (FLNK, "$(P)$(DEV):RdPpar-fanout")
+#   field (FLNK, "$(P)$(DEV):RdPpar-seq")
+   field (OUT, "$(P)$(DEV):parId-RB")
    field (UDFS, "NO_ALARM")
 }
 
-record(seq, "$(P)$(DEV):RdPpar-seq") {
+# The next two records are needed in order to avoid the loop.
+# Parameter ID is used in the record redirecton in the protocol file 
+# and it is processed every time the protocol function is used. Therefore
+# PV used to store parameter ID can't have any forward links to the PV that
+# use record redirection to parameter ID.
+# parId-RB is used to keep the name of the parameter and even if it's processed
+# i does not initiate any ather PV's processing
+record(stringin, "$(P)$(DEV):parId-RB") {
+   field (DESC, "HCS01's parameter id read-back")
+   field (UDFS, "NO_ALARM")
+}
+
+record (fanout, "$(P)$(DEV):RdPpar-fanout") {
    field(SELM, "All")
-   field(LNK0, "$(P)$(DEV):parName.PROC")
-   field(DOL0, "1")
-   field(DLY0, "0.5")
-   field(LNK1, "$(P)$(DEV):par:sRdV.PROC")
-   field(DOL1, "1")
-   field(DLY1, "1.0")
+   field(LNK0, "$(P)$(DEV):parName")
+   field(LNK1, "$(P)$(DEV):par:sRdV")   
 }
 
 record(lsi, "$(P)$(DEV):parName") {
    field (DESC, "Parameter's name")
    field (DTYP, "stream")
-   field (INP, "@rexroth.proto getParName($(P)$(DEV):parId) $(PORT)")
+   field (INP, "@rexroth.proto getParName($(P)$(DEV):parId-RB) $(PORT)")
    field (UDFS, "NO_ALARM")
    field (SIZV, "100")
 #   field (FLNK, "$(P)$(DEV):par:sRdV")
@@ -34,15 +45,15 @@ record(lsi, "$(P)$(DEV):parName") {
 record(stringout, "$(P)$(DEV):par:cSetV") {
    field (DESC, "Parameter value out")
    field (DTYP, "stream")
-   field (OUT, "@rexroth.proto setPar($(P)$(DEV):parId) $(PORT)")
-#   field (FLNK, "$(P)$(DEV):par:sRdV")
+   field (OUT, "@rexroth.proto setPar($(P)$(DEV):parId-RB) $(PORT)")
+   field (FLNK, "$(P)$(DEV):par:sRdV")
    field (UDFS, "NO_ALARM")
 }
 
 record(stringin, "$(P)$(DEV):par:sRdV") {
    field (DESC, "Parameter value in")
    field (DTYP, "stream")
-   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId,$(P)$(DEV):parStatus,$(P)$(DEV):parMin,$(P)$(DEV):parMax,$(P)$(DEV):parEGU) $(PORT)")
+   field (INP, "@rexroth.proto getPar($(P)$(DEV):parId-RB,$(P)$(DEV):parStatus,$(P)$(DEV):parMin,$(P)$(DEV):parMax,$(P)$(DEV):parEGU) $(PORT)")
    field (UDFS, "NO_ALARM")
    field (FLNK, "$(P)$(DEV):parName")
 }

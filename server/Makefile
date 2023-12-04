@@ -48,7 +48,7 @@ CLASSES = $(patsubst $(SRC_DIR)/%.java,$(BUILD_DIR)/%.class,$(SOURCES))
 # Set the external JAR libraries
 # Ubuntu: EXTERNAL_LIBS = $(EAL_SDK)/lib/libEALJavaWrapper.jar:/usr/share/java/commons-lang3-3.11.jar
 # Centos7: EXTERNAL_LIBS = $(EAL_SDK)/lib/libEALJavaWrapper.jar:/usr/share/java/commons-lang3-3.11.jar
-EXTERNAL_LIBS = $(EAL_SDK)/lib/libEALJavaWrapper.jar:/usr/share/java/commons-lang3.jar
+EXTERNAL_LIBS = $(EAL_SDK)/lib/libEALJavaWrapper.jar:/usr/share/java/commons-lang3.jar:/usr/share/java/commons-cli.jar
 
 # Default target
 all: $(OUT_DIR)/$(MAIN_CLASS).jar
@@ -63,7 +63,7 @@ $(OUT_DIR)/$(MAIN_CLASS).jar: $(CLASSES)
 
 # Run the $(MAIN_CLASS)
 run: $(OUT_DIR)/$(MAIN_CLASS).jar
-	$(JAVA) -cp $(CLASSPATH) $(MAIN_CLASS) $(SERVER_PORT) $(BIND_ADDR)
+	$(JAVA) -cp $(CLASSPATH) $(MAIN_CLASS) $(MY_ARGS)
 
 # Clean up
 clean:
