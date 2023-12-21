@@ -32,7 +32,7 @@ opiinstall:
 	cd $(OPI_DIR); rm -f $(OPI_DIRNAME); ln -s $(LINK_DIR)/$(E3_MODULE_NAME)/$(OPI_VERSION)/ $(OPI_DIRNAME)
 
 server:
-	cd server; make
+	cd server; mkdir -p out; make
 
 server-clean:
 	cd server; make clean
