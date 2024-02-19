@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2024-02-19 10:49:10 by konrad-->
+<!--Saved on 2024-02-19 14:30:08 by konrad-->
 <display version="2.0.0">
   <name>Positioning status</name>
   <width>430</width>
@@ -62,10 +62,11 @@ Target position attained (generated only with OM)</text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_2</name>
-    <text>Positive position limit value exceeded
-Negaitive position limit value exceeded
+    <text>Negative travel range limit switch exceeded
 Positive travel range limit switch exceeded
-Negative travel range limit switch exceeded</text>
+Negaitive position limit value exceeded
+Positive position limit value exceeded
+</text>
     <x>40</x>
     <y>258</y>
     <width>370</width>

@@ -25,4 +25,5 @@ file "rexroth-mbbiDirect.template" { pattern
 {S            FUNC         SCAN    DESC}
 {PS  	      "psstatus"   ".5"	   "Power supply status"}
 {Positioning  "posstatus"  ".5"	   "Positioning status"}
+{PosLimits    "limstatus"  ".5"	   "Position limits status"}
 }
