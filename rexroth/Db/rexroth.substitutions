@@ -17,6 +17,8 @@ file "rexroth-dblPar.template" { pattern
 {Acc  "accel"      "mm/s²"	 "4"	".5"	"Motor acceleration"}
 {Dec  "decel"      "mm/s²"	 "4"	".5"	"Motor deceleration"}
 {Jerk "jerk"       "mm/s³"	 "4"	".5"	"Motor jerk"}
+{VctrlGain "vctrlgain"       "Nm/(rad/s)"	 "3"	"1"	"Vel. contr. gain"}
+{VctrlIntegr "vctrlintegr"       "ms"	 "1"	"1"	"Vel. contr. integral"}
 }
 
 file "rexroth-mbbiDirect.template" { pattern

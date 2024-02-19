@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-12-01 19:22:25 by konrad-->
+<!--Saved on 2024-02-19 10:41:08 by konrad-->
 <display version="2.0.0">
   <name>IndraDrive</name>
   <macros>
@@ -57,6 +57,7 @@
           <R>:asynRec</R>
         </macros>
         <target>window</target>
+        <description>Open Display</description>
       </action>
     </actions>
     <pv_name>ioc26-rexroth:asynRec</pv_name>
@@ -118,13 +119,20 @@
         </macros>
         <group_name></group_name>
       </tab>
+      <tab>
+        <name>Set-up</name>
+        <file>helper-opi-files/set-up.bob</file>
+        <macros>
+        </macros>
+        <group_name></group_name>
+      </tab>
     </tabs>
     <x>10</x>
     <y>240</y>
-    <width>440</width>
+    <width>460</width>
     <height>400</height>
     <direction>0</direction>
-    <tab_width>140</tab_width>
+    <tab_width>110</tab_width>
   </widget>
   <widget type="action_button" version="3.0.0">
     <name>Action Button_2</name>
@@ -132,6 +140,7 @@
       <action type="open_display">
         <file>helper-opi-files/param-rw.bob</file>
         <target>window</target>
+        <description>Open Display</description>
       </action>
     </actions>
     <text>Parameter R/W</text>
@@ -147,5 +156,6 @@
       <color red="240" green="240" blue="240">
       </color>
     </background_color>
+    <tooltip>$(actions)</tooltip>
   </widget>
 </display>

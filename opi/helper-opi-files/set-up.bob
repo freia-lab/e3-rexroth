@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2024-02-19 14:02:32 by konrad-->
+<display version="2.0.0">
+  <name>set-up</name>
+  <macros>
+    <W>freia.physics.uu.se</W>
+  </macros>
+  <width>450</width>
+  <height>350</height>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <text>Parameter ID</text>
+    <x>10</x>
+    <y>10</y>
+    <width>110</width>
+    <height>30</height>
+    <font>
+      <font name="Header 3" family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box</name>
+    <pv_name>$(P)$(DEV):parId</pv_name>
+    <x>120</x>
+    <y>10</y>
+    <width>130</width>
+    <font>
+      <font name="Header 3" family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <background_color>
+      <color name="Write_Background" red="224" green="217" blue="202">
+      </color>
+    </background_color>
+    <items>
+      <item>S-0-0049</item>
+      <item>S-0-0050</item>
+      <item>S-0-0052</item>
+    </items>
+    <items_from_pv>false</items_from_pv>
+    <editable>true</editable>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_1</name>
+    <text>S-0-0049  Positive position limit
+S-0-0050  Negative position limit
+S-0-0052  Reference distance</text>
+    <x>220</x>
+    <y>40</y>
+    <width>225</width>
+    <height>70</height>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>  Velocity Controller  </name>
+    <y>250</y>
+    <width>440</width>
+    <height>92</height>
+    <transparent>true</transparent>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_1</name>
+      <macros>
+        <L>Gain</L>
+        <S>VctrlGain</S>
+      </macros>
+      <file>dbl-par.bob</file>
+      <width>399</width>
+      <height>30</height>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_2</name>
+      <macros>
+        <L>Integral action</L>
+        <S>VctrlIntegr</S>
+      </macros>
+      <file>dbl-par.bob</file>
+      <y>20</y>
+      <width>399</width>
+      <height>30</height>
+    </widget>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>Group</name>
+    <x>10</x>
+    <y>110</y>
+    <width>430</width>
+    <height>130</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>Label_2</name>
+      <text>Name:</text>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_3</name>
+      <text>Status:</text>
+      <y>20</y>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_6</name>
+      <text>Min:</text>
+      <y>40</y>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update</name>
+      <pv_name>$(P)$(DEV):par:sRdV</pv_name>
+      <x>60</x>
+      <y>80</y>
+      <width>180</width>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_7</name>
+      <text>Max:</text>
+      <y>60</y>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_8</name>
+      <text>Scan:</text>
+      <x>260</x>
+      <y>100</y>
+      <width>70</width>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_9</name>
+      <text>Value:</text>
+      <y>80</y>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Entry_1</name>
+      <pv_name>$(P)$(DEV):par:cSetV</pv_name>
+      <x>60</x>
+      <y>100</y>
+      <width>180</width>
+    </widget>
+    <widget type="combo" version="2.0.0">
+      <name>SCAN</name>
+      <pv_name>$(P)$(DEV):par:sRdV.SCAN</pv_name>
+      <x>320</x>
+      <y>100</y>
+      <width>110</width>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_1</name>
+      <pv_name>$(P)$(DEV):parName.$</pv_name>
+      <x>60</x>
+      <width>370</width>
+      <format>6</format>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_2</name>
+      <pv_name>$(P)$(DEV):parStatus</pv_name>
+      <x>60</x>
+      <y>20</y>
+      <width>70</width>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_3</name>
+      <pv_name>$(P)$(DEV):parEGU</pv_name>
+      <x>240</x>
+      <y>80</y>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_4</name>
+      <pv_name>$(P)$(DEV):parMin</pv_name>
+      <x>60</x>
+      <y>40</y>
+      <width>180</width>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_5</name>
+      <pv_name>$(P)$(DEV):parMax</pv_name>
+      <x>60</x>
+      <y>60</y>
+      <width>180</width>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_6</name>
+      <pv_name>$(P)$(DEV):parEGU</pv_name>
+      <x>240</x>
+      <y>40</y>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_7</name>
+      <pv_name>$(P)$(DEV):parEGU</pv_name>
+      <x>240</x>
+      <y>60</y>
+    </widget>
+  </widget>
+</display>

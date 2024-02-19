@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-30 14:30:58 by konrad-->
+<!--Saved on 2024-02-19 13:46:25 by konrad-->
 <display version="2.0.0">
   <name>movement parameters</name>
   <width>500</width>
   <height>500</height>
-  <widget type="group" version="2.0.0">
+  <widget type="group" version="3.0.0">
     <name>Group</name>
     <x>30</x>
     <y>50</y>
-    <width>350</width>
+    <width>400</width>
     <height>120</height>
     <style>3</style>
     <transparent>true</transparent>
@@ -19,7 +19,6 @@
         <S>Vel</S>
       </macros>
       <file>dbl-par.bob</file>
-      <width>350</width>
       <height>30</height>
     </widget>
     <widget type="embedded" version="2.0.0">
@@ -30,7 +29,6 @@
       </macros>
       <file>dbl-par.bob</file>
       <y>30</y>
-      <width>350</width>
       <height>30</height>
     </widget>
     <widget type="embedded" version="2.0.0">
@@ -41,7 +39,6 @@
       </macros>
       <file>dbl-par.bob</file>
       <y>60</y>
-      <width>350</width>
       <height>30</height>
     </widget>
     <widget type="embedded" version="2.0.0">
@@ -52,7 +49,6 @@
       </macros>
       <file>dbl-par.bob</file>
       <y>90</y>
-      <width>350</width>
       <height>30</height>
     </widget>
   </widget>

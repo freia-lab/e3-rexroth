@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-30 11:13:16 by konrad-->
+<!--Saved on 2024-02-19 10:49:10 by konrad-->
 <display version="2.0.0">
   <name>Positioning status</name>
   <width>430</width>
-  <height>230</height>
-  <widget type="group" version="2.0.0">
+  <height>380</height>
+  <widget type="group" version="3.0.0">
     <name>Group</name>
     <x>10</x>
     <y>10</y>
@@ -49,5 +49,28 @@ Target position attained (generated only with OM)</text>
       <wrap_words>false</wrap_words>
       <tooltip>Parameter S-0-0437</tooltip>
     </widget>
+  </widget>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor_3</name>
+    <pv_name>$(P)$(DEV):PosLimits:Stat</pv_name>
+    <x>10</x>
+    <y>260</y>
+    <width>20</width>
+    <height>80</height>
+    <numBits>4</numBits>
+    <horizontal>false</horizontal>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_2</name>
+    <text>Positive position limit value exceeded
+Negaitive position limit value exceeded
+Positive travel range limit switch exceeded
+Negative travel range limit switch exceeded</text>
+    <x>40</x>
+    <y>258</y>
+    <width>370</width>
+    <height>90</height>
+    <wrap_words>false</wrap_words>
+    <tooltip>Parameter S-0-0437</tooltip>
   </widget>
 </display>

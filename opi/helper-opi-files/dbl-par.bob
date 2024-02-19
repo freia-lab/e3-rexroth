@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-29 12:28:37 by konrad-->
+<!--Saved on 2024-02-19 13:44:32 by konrad-->
 <display version="2.0.0">
   <name>par-dbl</name>
-  <width>350</width>
+  <width>400</width>
   <height>30</height>
-  <widget type="group" version="2.0.0">
+  <widget type="group" version="3.0.0">
     <name>Group</name>
     <x>2</x>
     <y>2</y>
@@ -20,14 +20,23 @@
       <name>Text Update_6</name>
       <pv_name>$(P)$(DEV):$(S):sRdV</pv_name>
       <x>120</x>
-      <width>130</width>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Entry_2</name>
-      <pv_name>$(P)$(DEV):$(S):cSetV</pv_name>
-      <x>260</x>
-      <width>70</width>
+      <width>88</width>
       <show_units>false</show_units>
     </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_7</name>
+      <pv_name>$(P)$(DEV):$(S):sRdV.EGU</pv_name>
+      <x>218</x>
+      <width>80</width>
+      <show_units>false</show_units>
+    </widget>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Entry_2</name>
+    <pv_name>$(P)$(DEV):$(S):cSetV</pv_name>
+    <x>320</x>
+    <y>2</y>
+    <width>70</width>
+    <show_units>false</show_units>
   </widget>
 </display>
