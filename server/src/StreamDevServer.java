@@ -309,6 +309,12 @@ class ServerThread extends Thread {
 	    case "jerk":
 		return setPar(con, words, "S-0-0193.0.0");
 	       
+	    case "vctrlgain":
+		return setPar(con, words, "S-0-0100.0.0");
+
+	    case "vctrlintegr":
+		return setPar(con, words, "S-0-0101.0.0");
+
 	    case "velocity?":
 		return getPar(con, "S-0-0259.0.0", "velocity: ");
 	       
@@ -321,11 +327,20 @@ class ServerThread extends Thread {
 	    case "jerk?":
 		return getPar(con, "S-0-0193.0.0", "jerk: ");
 	       
+	    case "vctrlgain?":
+		return getPar(con, "S-0-0100.0.0", "vctrlgain: ");
+
+	    case "vctrlintegr?":
+		return getPar(con, "S-0-0101.0.0", "vctrlintegr: ");
+
 	    case "psstatus?":
 		return getPar(con, "P-0-0861.0.0", "psstatus: ");
 	       
 	    case "posstatus?":
 		return getPar(con, "S-0-0437.0.0", "posstatus: ");
+	       
+	    case "limstatus?":
+		return getPar(con, "S-0-0478.0.0", "limstatus: ");
 	       
 	    case "par?":
 		return getParAsString(con, words);
