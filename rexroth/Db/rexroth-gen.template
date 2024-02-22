@@ -107,7 +107,7 @@ record (mbbi, "$(P)$(DEV):sState") {
    field(THVL, "4")
    field(THST, "AF (Drive enabled)")
    field(FRVL, "3")
-   field(THST, "AH (Drive halt active)")
+   field(FRST, "AH (Drive halt active)")
    field (DTYP, "stream")
    field (INP, "@rexroth.proto get_stat $(PORT)")
    field (SCAN, ".5 second")
