@@ -12,23 +12,39 @@ https://www.boschrexroth.com/sv/se/media-details/0e437020-893e-4ad8-988b-4c5c4f0
 ealsdk-2.2.0-0.deb.zip:
 https://www.boschrexroth.com/sv/se/media-details/b7a0f168-f85d-4890-a9fb-0569a9bd26b7
 
+New version:
+Setup_EAL_SDK-2500_Linux_Deb.zip:
+https://www.boschrexroth.com/sv/se/media-details/b7a0f168-f85d-4890-a9fb-0569a9bd26b7
+
 The Makefile assumes that the packages are installed in /usr/local
 
 On Centos 7 one has to set environment variable EAL_SDK_02. It should point to the parent 
-directory of eal4Java.
-On Ubuntu 20.04.3 it was not needed as long one used the same localtion of the java libraries
-during the linking.
+directory of eal4Java in our case /usr/local/eal_sdk/02VRS
+
+On Ubuntu 20.04.3 it was not needed for version 2.400 as long one used the same location
+of the java libraries during the linking. Server compiled with version Version 2500
+didn't work unles EAL_SDK_02 was not set correctly.
 
 To compile the server run
 make server
 in the top directory
 
-To run the server run the commands: (example when EAL for Java is in /opt/eal4Java)
-export=EAL_SDK_02=/opt
-make run-server ARGS="-drive_ip 192.168.10.46 -port 2160 -max_conn 2 -bind_addr 0.0.0.0"
+To run the server run the commands: (example when EAL_SDK is in /usr/local):
+
+export=EAL_SDK_02=/usr/local/eal_sdk/02VRS
+make server-run ARGS="-drive_ip 192.168.10.46 -port 2160 -max_conn 2 -bind_addr 0.0.0.0"
 
 where; 
       -drive_ip defins the IP address of the motor controller (mandatory)
       -port port number of the server (default 2195)
       -bind_addr - default localhost
       -max_conn - maximum simultaneous connections (default 1, >1 is usefull when debugging using netcat)
+
+To install server in /opt/rexroth-server run:
+
+make server-install.
+
+To start the server at the boot time an example rexroth_server.service in this directory
+can be copied to /etc/systemd/system and enabled using the command:
+
+sudo systemctl enable rexroth-server

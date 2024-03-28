@@ -1,0 +1,44 @@
+# File /etc/systemd/system/rexroth_server.service
+#
+# After changes
+#   sudo systemctl daemon-reload
+#
+# Start/status/stop
+#   sudo systemctl start rexroth_server.service
+#   sudo systemctl status rexroth_server.service
+#   sudo systemctl stop rexroth_server.service
+#
+# Start when computer boots:
+#   sudo systemctl enable rexroth_server.service
+#
+# Log file:
+#   less +GF /var/log/rexroth/logger-console.log
+#
+# Console:
+#   telnet localhost 2196
+[Unit]
+Description=Rexroth IntraDrive StreamDevice server
+After=network-online.target
+
+
+[Service]
+User=ioc
+Group=ioc
+Environment=SERVER=StreamDevServer
+Environment=STREAMDEV_PORT=2195
+Environment=TELNET_PORT=2196
+Environment=INDRADRIVE_IP=192.168.10.46
+Environment=BIND_IP=0.0.0.0
+Environment=MAX_CONN=2
+
+Environment=EAL_SDK_02=/usr/local/eal_sdk/02VRS
+#Environment=EAL_SDK=/usr/local/eal_sdk/02VRS/eal4Java
+Environment=JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+ExecStart=/usr/bin/procServ --foreground --noautorestart --name rexroth-server --logfile /var/log/rexroth/logger-console.log ${TELNET_PORT} \
+${JAVA_HOME}/bin/java -cp /opt/rexroth-server/*:/usr/share/java/*:${JAVA_HOME}/lib/*:${EAL_SDK_02}/eal4Java/lib/* ${SERVER} -drive_ip ${INDRADRIVE_IP} -port ${STREAMDEV_PORT} -max_conn ${MAX_CONN} -bind_addr ${BIND_IP}
+
+# Systemd stops alarm logger by killing the process
+
+[Install]
+WantedBy=multi-user.target

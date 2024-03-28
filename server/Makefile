@@ -12,7 +12,7 @@ MAIN_CLASS = StreamDevServer
 EAL_SDK = /usr/local/eal_sdk/02VRS/eal4Java
 #EAL_SDK = /opt/eal4Java
 
-JAVA_HOME= /usr/lib/jvm/java-11-openjdk-amd64
+JAVA_HOME= /usr/lib/jvm/java-17-openjdk-amd64
 #JAVA_HOME= /opt/java/jdk-11.0.8+10
 
 # Set the source directory
