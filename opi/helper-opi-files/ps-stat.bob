@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-11-30 11:28:24 by konrad-->
+<!--Saved on 2024-06-10 11:15:31 by konrad-->
 <display version="2.0.0">
   <name>Positioning status</name>
   <width>430</width>
@@ -8,10 +8,10 @@
     <name>Byte Monitor_1</name>
     <pv_name>$(P)$(DEV):PS:Stat</pv_name>
     <x>10</x>
-    <y>10</y>
-    <width>20</width>
-    <height>335</height>
-    <numBits>16</numBits>
+    <y>137</y>
+    <width>21</width>
+    <height>210</height>
+    <numBits>10</numBits>
     <horizontal>false</horizontal>
   </widget>
   <widget type="label" version="2.0.0">
@@ -38,5 +38,62 @@ Drive ready for power output</text>
     <height>340</height>
     <wrap_words>false</wrap_words>
     <tooltip>Parameter S-0-0437</tooltip>
+  </widget>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor_2</name>
+    <pv_name>$(P)$(DEV):PS:Stat</pv_name>
+    <x>10</x>
+    <y>241</y>
+    <width>21</width>
+    <height>21</height>
+    <startBit>4</startBit>
+    <numBits>1</numBits>
+    <horizontal>false</horizontal>
+    <off_color>
+      <color name="LED-RED-OFF" red="110" green="101" blue="90">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="LED-RED-ON" red="255" green="60" blue="46">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor_7</name>
+    <pv_name>$(P)$(DEV):PS:Stat</pv_name>
+    <x>10</x>
+    <y>178</y>
+    <width>21</width>
+    <height>42</height>
+    <startBit>6</startBit>
+    <numBits>2</numBits>
+    <horizontal>false</horizontal>
+    <off_color>
+      <color name="LED-RED-OFF" red="110" green="101" blue="90">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="LED-RED-ON" red="255" green="60" blue="46">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor_8</name>
+    <pv_name>$(P)$(DEV):PS:Stat</pv_name>
+    <x>10</x>
+    <y>10</y>
+    <width>21</width>
+    <height>126</height>
+    <startBit>10</startBit>
+    <numBits>6</numBits>
+    <horizontal>false</horizontal>
+    <off_color>
+      <color name="LED-RED-OFF" red="110" green="101" blue="90">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="LED-RED-ON" red="255" green="60" blue="46">
+      </color>
+    </on_color>
   </widget>
 </display>
