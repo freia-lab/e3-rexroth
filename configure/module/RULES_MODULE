@@ -28,7 +28,8 @@ LINK_DIR = ../../OPIS
 
 .PHONY: opiinstall server server-clean server-run server-install
 opiinstall:
-	rsync -va --delete --exclude 'README.md' --exclude *~ $(TOP)/opi/ $(OPIS_HOME)/$(E3_MODULE_NAME)/$(OPI_VERSION)/
+	mkdir -p $(OPIS_HOME)/$(E3_MODULE_NAME)/$(OPI_VERSION)
+	rsync -va --delete --no-o --no-g --no-p --chmod=ug=rwX --exclude 'README.md' --exclude *~ $(TOP)/opi/ $(OPIS_HOME)/$(E3_MODULE_NAME)/$(OPI_VERSION)/
 	cd $(OPI_DIR); rm -f $(OPI_DIRNAME); ln -s $(LINK_DIR)/$(E3_MODULE_NAME)/$(OPI_VERSION)/ $(OPI_DIRNAME)
 
 
