@@ -223,8 +223,10 @@ record (ao, "$(P)$(DEV):moveAbs:cSetV") {
    field (OUT, "@rexroth.proto moveAbs $(PORT)")
    field (PREC, "4")
    field (EGU, "mm")
-   field (DRVH, "2083.0")
-   field (DRVL, "0.0")
+#   field (DRVH, "2083.0")
+#   field (DRVL, "0.0")
+   field (DRVH, "0.0")
+   field (DRVL, "-2083.0")
 }
 
 record (ao, "$(P)$(DEV):moveRel:cSetV") {
